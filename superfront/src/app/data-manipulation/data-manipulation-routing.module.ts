@@ -1,0 +1,16 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+
+import { DataManipulationComponent } from './data-manipulation/data-manipulation.component';
+
+const routes: Routes = [
+      {path: '', component: DataManipulationComponent}
+
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class DataManipulationRoutingModule { }
