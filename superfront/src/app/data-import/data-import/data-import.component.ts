@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit, EventEmitter, Input, Output} from '@angular/core';
+import {  Point } from 'src/app/_models/point';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-data-import',
@@ -7,7 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DataImportComponent implements OnInit {
 
-  constructor() { }
+  baseUrl:string = "http://localhost:3000";
+
+  private  points;
+
+  implementTable(){
+    this.httpClient.get(this.baseUrl + '/points').subscribe((res : any[])=>{
+            console.log(res);
+            this.points = res;
+            });
+
+  }
+
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
   }

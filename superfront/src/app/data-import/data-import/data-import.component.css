@@ -1,3 +1,13 @@
-div{
+.toolbar{
 display: inline-block;
+margin-right: 10px;
 }
+
+.table{
+margin: auto;
+width: 80%;
+text-align: center;
+
+
+}
+

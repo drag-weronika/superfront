@@ -1,2 +1,11 @@
-<p>data import component works!</p>
+<div class="toolbar">
+  <app-uploader></app-uploader>
+</div>
+<div class="toolbar">
+<app-display-table (valueDisplayTable)="implementTable($event)"></app-display-table>
+</div>
 
+<div class="table">
+  <br/>
+<app-table-with-data  [point]="point" [points]="points"></app-table-with-data>
+</div>

@@ -1,8 +1,16 @@
 
-<div class="container">
+
 
   <div class="header">
+    <div class="hls">
     <img src="img/logo.jpg" alt="LogoImageError">
+    </div>
+    <div class="hrs">
+      <button>
+        <a routerLink="/auth">Log in</a>
+      </button>
+    </div>
+
   </div>
   <hr size="2px" width="100%">
 
@@ -11,7 +19,6 @@
       <div class="column left" >
         <nav>
           <a routerLink="/basic">Basic</a>
-          <a routerLink="/auth">Authentication</a>
           <a routerLink="/data-import">Data Import</a>
           <a routerLink="/data-manipulation">Data Manipulation</a>
           <a routerLink="/data-visualization">Data Visualization</a>
@@ -23,14 +30,12 @@
         <router-outlet></router-outlet>
       </div>
     </div>
-
   </div>
 
-  <div class="footer">
-    <p>Footer Text</p>
-  </div>
 
-</div>
+
+
+
 
 
 

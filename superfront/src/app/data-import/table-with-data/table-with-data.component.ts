@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
+import { Point } from 'src/app/_models/point';
 
 @Component({
   selector: 'app-table-with-data',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-with-data.component.css']
 })
 export class TableWithDataComponent implements OnInit {
+
+  @Input() point: Point;
+  @Input() points: Point[];
 
   constructor() { }
 
