@@ -1,1 +1,11 @@
-<p>collapse-menu-category works!</p>
+<div>
+  <div class="description">
+    <label>Set category:</label>
+  </div>
+  <select (change)="filterCategory($event.target.value)">
+    <option value="0">-----None-----</option>
+    <option *ngFor="let category of categories" value={{summary}}>
+      {{category}}
+    </option>
+  </select>
+</div>

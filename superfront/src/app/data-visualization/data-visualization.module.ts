@@ -13,6 +13,7 @@ import { DataVisualizationComponent } from './data-visualization/data-visualizat
   imports: [
     CommonModule,
     DataVisualizationRoutingModule
-  ]
+  ],
+  exports: [ChartComponent]
 })
 export class DataVisualizationModule { }

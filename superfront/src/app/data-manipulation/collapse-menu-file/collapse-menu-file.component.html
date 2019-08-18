@@ -1,1 +1,11 @@
-<p>collapse-menu-file works!</p>
+<div>
+  <div class="description">
+    <label>Choose file:</label>
+  </div>
+  <select (change)="filterFile($event.target.value)">
+    <option value="0">-----None-----</option>
+    <option *ngFor="let file of files" value={{summary}}>
+      {{file}}
+    </option>
+  </select>
+</div>

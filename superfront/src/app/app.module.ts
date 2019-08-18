@@ -17,6 +17,7 @@ import { UploaderModule } from './uploader/uploader.module';
 import { ExporterModule } from './exporter/exporter.module';
 import { DownloaderModule } from './downloader/downloader.module';
 
+import { DataService } from './data.service';
 
 @NgModule({
   declarations: [

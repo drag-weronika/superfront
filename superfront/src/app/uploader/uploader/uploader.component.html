@@ -1,0 +1,9 @@
+<input
+  #fileInput
+  type="file"
+  class="upload__input"
+  (change)="uploadFile( fileInput.file) ; fileInput.value = null;"
+/>
+<button (click)="postOnServer(fileInput.file)">Save file</button>
+
+

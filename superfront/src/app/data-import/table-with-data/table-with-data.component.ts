@@ -1,5 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { Point } from 'src/app/_models/point';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-table-with-data',
