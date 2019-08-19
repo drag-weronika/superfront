@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UploaderService } from "src/app/uploader/uploader.service";
+
 
 
 @Component({
@@ -9,16 +9,6 @@ import { UploaderService } from "src/app/uploader/uploader.service";
 })
 export class UploaderComponent implements OnInit {
 
-  constructor( uploaderService: UploaderService ) { }
-
-   public uploadFile( file: File ) {
-        this.uploaderService.uploadFile(file);
-
-   }
-
-  public postOnServer(file: File){
-        this.uploaderService.uploadFile(file);
-    }
 
   ngOnInit() {
   }

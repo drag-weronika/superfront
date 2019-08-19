@@ -11,7 +11,5 @@ export class UploaderService {
 
    constructor(private http : HttpClient) {}
 
-   public uploadFile( file: File ): Observable<any> {
-      return this.http.post(this.baseURL+'uploaded', file );
-   }
+
 }

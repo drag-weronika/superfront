@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { UploaderModule} from 'src/app/uploader/uploader.module';
 import { UploaderComponent} from 'src/app/uploader/uploader/uploader.component';
+import { SaverComponent} from 'src/app/uploader/saver/saver.component';
 
 
 

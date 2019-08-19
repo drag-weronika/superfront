@@ -14,6 +14,7 @@ import { SaveButtonComponent } from './save-button/save-button.component';
   imports: [
     CommonModule,
     DataManipulationRoutingModule
-  ]
+  ],
+  exports: [CollapseMenuFileComponent]
 })
 export class DataManipulationModule { }
