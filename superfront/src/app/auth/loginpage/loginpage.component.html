@@ -1,3 +1,20 @@
-<p>loginpage works!</p>
-<button><a routerLink="/auth/register">Register</a></button>
-<router-outlet></router-outlet>
+<div class="mgr">
+<div class="form">
+  <div class="auth">
+
+    <div class="line"><label for="email"><b>Email</b></label></div>
+    <div class="line"> <input type="text" placeholder="Enter Email" name="email" required></div>
+    <br/>
+    <div class="line"><label for="psw"><b>Password</b></label></div>
+    <div class="line"> <input type="password" placeholder="Enter Password" name="psw" required></div>
+    <br/>
+    <button type="submit" class="registerbtn">Login in</button>
+
+    <div class="register">
+      <P>Don't have an account yet?</P>
+      <button><a routerLink="/auth/register">Register</a></button>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+</div>

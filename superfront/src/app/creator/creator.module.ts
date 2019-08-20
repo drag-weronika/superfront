@@ -11,6 +11,7 @@ import { CategoryCreatorComponent } from './category-creator/category-creator.co
   imports: [
     CommonModule,
     CreatorRoutingModule
-  ]
+  ],
+  exports: [GroupCreatorComponent,CategoryCreatorComponent]
 })
 export class CreatorModule { }

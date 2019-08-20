@@ -8,12 +8,17 @@ import { CollapseMenuGroupComponent } from './collapse-menu-group/collapse-menu-
 import { CollapseMenuCategoryComponent } from './collapse-menu-category/collapse-menu-category.component';
 import { SaveButtonComponent } from './save-button/save-button.component';
 
+import { CreatorModule}  from 'src/app/creator/creator.module';
+import { GroupCreatorComponent}  from 'src/app/creator/group-creator/group-creator.component';
+import { CategoryCreatorComponent}  from 'src/app/creator/category-creator/category-creator.component';
+
 
 @NgModule({
   declarations: [DataManipulationComponent, CollapseMenuFileComponent, CollapseMenuGroupComponent, CollapseMenuCategoryComponent, SaveButtonComponent],
   imports: [
     CommonModule,
-    DataManipulationRoutingModule
+    DataManipulationRoutingModule,
+    CreatorModule
   ],
   exports: [CollapseMenuFileComponent]
 })
