@@ -4,9 +4,10 @@ import { CommonModule } from '@angular/common';
 import { UploaderRoutingModule } from './uploader-routing.module';
 import { UploaderComponent } from './uploader/uploader.component';
 import { SaverComponent } from './saver/saver.component';
+import { NameSetterComponent } from './name-setter/name-setter.component';
 
 @NgModule({
-  declarations: [UploaderComponent, SaverComponent],
+  declarations: [UploaderComponent, SaverComponent, NameSetterComponent],
   imports: [
     CommonModule,
     UploaderRoutingModule

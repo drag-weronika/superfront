@@ -6,12 +6,12 @@ import { UploaderModule} from 'src/app/uploader/uploader.module';
 import { UploaderComponent} from 'src/app/uploader/uploader/uploader.component';
 import { SaverComponent} from 'src/app/uploader/saver/saver.component';
 
-
-
 import { DataImportRoutingModule } from './data-import-routing.module';
 import { DataImportComponent } from './data-import/data-import.component';
 import { DisplayTableComponent } from './display-table/display-table.component';
 import { TableWithDataComponent } from './table-with-data/table-with-data.component';
+
+
 
 
 @NgModule({

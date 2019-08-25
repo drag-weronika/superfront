@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { File } from 'src/app/_models/file';
 
 @Component({
   selector: 'app-collapse-menu-file',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CollapseMenuFileComponent implements OnInit {
 
+  @Input()files: File[];
   constructor() { }
 
   ngOnInit() {
