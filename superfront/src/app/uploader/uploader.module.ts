@@ -12,7 +12,7 @@ import { NameSetterComponent } from './name-setter/name-setter.component';
     CommonModule,
     UploaderRoutingModule
   ],
-  exports: [UploaderComponent, SaverComponent]
+  exports: [UploaderComponent, SaverComponent, NameSetterComponent]
 
 })
 export class UploaderModule { }
