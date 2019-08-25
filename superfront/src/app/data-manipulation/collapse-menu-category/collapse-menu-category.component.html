@@ -5,7 +5,7 @@
   <select (change)="filterCategory($event.target.value)">
     <option value="0">-----None-----</option>
     <option *ngFor="let category of categories" value={{summary}}>
-      {{category}}
+      {{category.categoryName}}
     </option>
   </select>
 </div>

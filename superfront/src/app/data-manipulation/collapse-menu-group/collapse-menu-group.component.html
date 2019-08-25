@@ -5,7 +5,7 @@
   <select (change)="filterGroup($event.target.value)">
     <option value="0">-----None-----</option>
     <option *ngFor="let group of groups" value={{summary}}>
-      {{group}}
+      {{group.groupName}}
     </option>
   </select>
 </div>

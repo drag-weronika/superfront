@@ -5,7 +5,7 @@
   <select (change)="filterFile($event.target.value)">
     <option value="0">-----None-----</option>
     <option *ngFor="let file of files" value={{summary}}>
-      {{file.name}}
+      {{file.fileName}}
     </option>
   </select>
 </div>

@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 
 import { DataImportService } from 'src/app/data-import/data-import.service';
 
-
 @Component({
   selector: 'app-data-import',
   templateUrl: './data-import.component.html',
@@ -13,20 +12,9 @@ import { DataImportService } from 'src/app/data-import/data-import.service';
 })
 export class DataImportComponent implements OnInit {
 
-  private points : Point[] ;
-  private pointsObservable : Observable<Point[]> ;
 
-  constructor(private dataImportService: DataImportService){
-  }
-
-  saveFile(){
-  }
-
-  implementTable() {
-  }
 
   ngOnInit() {
-
   }
 
 }

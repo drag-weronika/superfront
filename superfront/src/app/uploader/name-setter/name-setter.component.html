@@ -1,2 +1,4 @@
-<input type="text"/>
-<button>Set name</button>
+<form style="display:inline-block;margin:0 auto;"  id='fileNameForm' (ngSubmit)="FileSubmit()" enctype="multipart/form-data">
+<input   type="text" name="fileName"  (change)="setName($event)"  />
+<input   type='submit' value='Set Name' />
+</form>
