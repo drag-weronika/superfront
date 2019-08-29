@@ -12,8 +12,10 @@ export class NameSetterComponent implements OnInit {
 
   @Input() fileToUpload: File;
 
-  setName(name:string){
-  this.fileToUpload.fileName=name;
+  setName(event:any){
+  console.log("ustawiam nazwe");
+  this.fileToUpload.fileName=event.target.value;
+
   }
 
   ngOnInit() {

@@ -12,7 +12,9 @@ import { DataImportService } from 'src/app/data-import/data-import.service';
 })
 export class DataImportComponent implements OnInit {
 
+  bindFile(event){
 
+  }
 
   ngOnInit() {
   }

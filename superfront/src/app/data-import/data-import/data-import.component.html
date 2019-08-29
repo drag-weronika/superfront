@@ -1,6 +1,6 @@
 <div class="mgr">
 <div class="toolbar">
-  <app-uploader></app-uploader>
+  <app-uploader (value)="bindFile($event)"></app-uploader>
 </div>
 <div class="toolbar">
   <app-name-setter></app-name-setter>
