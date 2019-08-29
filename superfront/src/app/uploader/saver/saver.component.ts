@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-saver',
@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SaverComponent implements OnInit {
 
+  @Output() value3:EventEmitter<any>=new EventEmitter<any>();
   constructor() { }
+
+  emitValue3(event: any){
+      this.value3.emit(event);
+  }
 
   ngOnInit() {
   }

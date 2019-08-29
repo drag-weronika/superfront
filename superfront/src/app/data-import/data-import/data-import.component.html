@@ -1,20 +1,16 @@
 <div class="mgr">
 <div class="toolbar">
-  <app-uploader (value)="bindFile($event)"></app-uploader>
+  <app-uploader (value1)="onChange($event)"></app-uploader>
 </div>
 <div class="toolbar">
-  <app-name-setter></app-name-setter>
+  <app-name-setter (value2)="setName($event)"></app-name-setter>
 </div>
   <div class="toolbar">
-  <app-saver></app-saver>
-</div>
-
-<div class="toolbar">
-<app-display-table (valueDisplayTable)="implementTable($event)"></app-display-table>
+  <app-saver (value3)="fileSubmit($event)"></app-saver>
 </div>
 
 <div class="table">
   <br/>
-<app-table-with-data  [point]="point" [points]="points"></app-table-with-data>
+<app-table-with-data [fileToUpload]="fileToUpload"></app-table-with-data>
 </div>
 </div>

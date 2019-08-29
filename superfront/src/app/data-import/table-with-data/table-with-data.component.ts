@@ -1,5 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { Point } from 'src/app/_models/point';
+import { File } from 'src/app/_models/file';
+
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,8 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class TableWithDataComponent implements OnInit {
 
-  @Input() point: Point;
-  @Input() points: Point[];
+  @Input() fileToUpload: File;
 
   constructor() { }
 

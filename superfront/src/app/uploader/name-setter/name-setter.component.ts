@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { File } from 'src/app/_models/file';
 
 @Component({
@@ -10,12 +10,11 @@ export class NameSetterComponent implements OnInit {
 
   constructor() { }
 
-  @Input() fileToUpload: File;
 
-  setName(event:any){
-  console.log("ustawiam nazwe");
-  this.fileToUpload.fileName=event.target.value;
+  @Output() value2:EventEmitter<string>=new EventEmitter<string>();
 
+  emitValue2(name: string){
+     this.value2.emit(name);
   }
 
   ngOnInit() {

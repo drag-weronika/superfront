@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -9,12 +9,20 @@ import { Observable } from 'rxjs';
 })
 export class DataImportService {
 
-constructor (private http: HttpClient){}
+   baseURL = 'http://localhost:3000/file';
 
-baseUrl: string="api/files";
+   constructor(private http : HttpClient) {}
 
-postFile( ){
-}
+   getFiles(){
+       return this.http.get<File[]>(this.baseURL);
+   }
+
+   addFile(file){
+       let req = new HttpRequest('POST',this.baseURL,file,{
+       reportProgress:true
+       });
+     return this.http.request(req);
+   }
 
 
 }

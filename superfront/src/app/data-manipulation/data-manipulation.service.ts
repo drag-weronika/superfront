@@ -12,4 +12,21 @@ export class DataManipulationService {
 
   baseUrl: string="api/files";
 
+  getFiles(){
+  }
+
+  getCategories(){
+  }
+
+  getGroups(){
+  }
+
+  getFileId(){
+  }
+
+  getCategoryId(){
+  }
+
+  getGroupId(){
+  }
 }
