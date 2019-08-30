@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class DataImportService {
 
-   baseURL = 'http://localhost:3000/file';
+   baseURL = 'http://localhost:3000/api/file';
 
    constructor(private http : HttpClient) {}
 

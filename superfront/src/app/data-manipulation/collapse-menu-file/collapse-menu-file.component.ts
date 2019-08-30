@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { File } from 'src/app/_models/file';
 
 @Component({
@@ -9,7 +9,19 @@ import { File } from 'src/app/_models/file';
 export class CollapseMenuFileComponent implements OnInit {
 
   @Input()files: File[];
+  @Output() list1=new EventEmitter<any>();
+  @Output() selected1=new EventEmitter<any>();
+
   constructor() { }
+
+  requestList1(){
+    this.list1.emit(null);
+  }
+
+  emitSelected1(val){
+    this.selected1.emit(val);
+  }
+
 
   ngOnInit() {
   }
