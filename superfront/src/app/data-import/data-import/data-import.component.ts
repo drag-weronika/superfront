@@ -62,7 +62,7 @@ export class DataImportComponent implements OnInit {
          const file:File = this.fileToUpload;
          formData.append("filename",this.fileToUpload.fileName);
          console.log(this.fileToUpload.fileName);
-         formData.append("uploads",this.fileToUpload.fileName);
+         formData.append("uploads",this.fileToUpload.fileContent);
           this.dataImportService.addFile(formData).subscribe(
 
           (event)=>{

@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import { File } from 'src/app/_models/file';
 import { Group } from 'src/app/_models/group';
 import { Category } from 'src/app/_models/category';
@@ -9,12 +9,16 @@ import { Category } from 'src/app/_models/category';
   styleUrls: ['./save-button.component.css']
 })
 export class SaveButtonComponent implements OnInit {
-  @Input() file: File;
-  @Input() group: Group;
+  @Input() selectedFile: File;
+  @Input() selectedGroup: Group;
+  @Input() selectedCategory;
+  @Output() selectedSet=new EventEmitter<any>();
+
+
   constructor() { }
 
   combine() {
-    /**POST -> this.file.fileId*/
+    this.selectedSet.emit(null);
 
   }
 

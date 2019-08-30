@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse, HttpRequest } from '@angular/common/http';
 import { File } from 'src/app/_models/file';
 import { Category } from 'src/app/_models/category';
 import { Group } from 'src/app/_models/group';
@@ -35,13 +35,10 @@ export class DataManipulationService {
 
   }
 
-
-  getFileId(){
+  postSet(set){
+     let req = new HttpRequest('POST',this.baseUrl,set );
+         return this.http.request(req);
   }
 
-  getCategoryId(){
-  }
 
-  getGroupId(){
-  }
 }

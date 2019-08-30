@@ -28,7 +28,15 @@ export class DataManipulationComponent implements OnInit {
       this.selectedFile = event.target.value;
   }
 
-
+  setSubmit(){
+      const formData: any = new FormData();
+            formData.append("fileName",this.selectedFile.fileName);
+            formData.append("categoryName",this.selectedCategory.categoryName);
+            formData.append("groupName",this.selectedGroup.groupName);
+            this.dataManipulationService.postSet(formData).subscribe(
+            (event)=>{}
+            );
+  }
   ngOnInit() {
   }
 
