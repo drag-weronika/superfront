@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-dropdown-file-search',
@@ -8,6 +9,16 @@ import { Component, OnInit } from '@angular/core';
 export class DropdownFileSearchComponent implements OnInit {
 
   constructor() { }
+  @Output() selectedSet=new EventEmitter<any>();
+  @Output() list4=new EventEmitter<any>();
+
+  requestListOfSets(){
+    this.list4.emit(null);
+  }
+
+  emitSelectedSet(val){
+      this.selectedSet.emit(val);
+  }
 
   ngOnInit() {
   }

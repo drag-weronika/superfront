@@ -36,7 +36,7 @@ export class DataManipulationService {
   }
 
   postSet(set){
-     let req = new HttpRequest('POST',this.baseUrl,set );
+     let req = new HttpRequest('POST',this.baseUrl+'/set/${id}',set );
          return this.http.request(req);
   }
 

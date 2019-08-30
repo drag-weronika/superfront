@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-chart',
@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChartComponent implements OnInit {
 
+  @Output() plot=new EventEmitter<any>();
   constructor() { }
+
+  createChart(){
+    this.plot.emit(null);
+  }
 
   ngOnInit() {
   }
