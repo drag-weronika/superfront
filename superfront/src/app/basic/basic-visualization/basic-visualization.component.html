@@ -1,7 +1,8 @@
 <div class="mgr">
-<app-uploader></app-uploader>
-<app-chart></app-chart>
+  <form style="display:inline-block;margin:0 auto;"  id='uploadForm' (ngSubmit)="fileSubmit()" enctype="multipart/form-data">
+    <input   type="file" name="userFile"  (change)="onChange($event.target.files[0])" />
+  </form>
   <br/>
   <br/>
-<app-displayed-chart></app-displayed-chart>
+<div #charts id="test"></div>
 </div>

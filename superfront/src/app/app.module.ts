@@ -16,6 +16,7 @@ import { CreatorModule } from './creator/creator.module';
 import { UploaderModule } from './uploader/uploader.module';
 import { ExporterModule } from './exporter/exporter.module';
 import { DownloaderModule } from './downloader/downloader.module';
+import { HighchartsService } from './highcharts.service';
 
 import { DataService } from './data.service';
 
@@ -41,7 +42,7 @@ import { DataService } from './data.service';
 
 
   ],
-  providers: [],
+  providers: [HighchartsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
