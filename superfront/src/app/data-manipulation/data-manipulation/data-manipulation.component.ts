@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http'
 
 import {DataManipulationService} from 'src/app/data-manipulation/data-manipulation.service';
 import { File } from 'src/app/_models/file';
+import { FileRest } from 'src/app/_models/fileRest';
 import { Category } from 'src/app/_models/category';
 import { Group } from 'src/app/_models/group';
 
@@ -17,12 +18,16 @@ export class DataManipulationComponent implements OnInit {
   selectedCategory: Category;
   selectedGroup: Group;
 
-  files: File[];
+  files: FileRest[];
   constructor(public dataManipulationService: DataManipulationService ) { }
 
   getFiles(){
     this.dataManipulationService.getFiles().subscribe(
-    (files : File[]) => { this.files = files;})
+    (files : FileRest[]) => { this.files = files;
+    console.log(this.files[0].fileName);}
+    )
+
+
   }
   selectChangeHandler (event: any) {
       this.selectedFile = event.target.value;

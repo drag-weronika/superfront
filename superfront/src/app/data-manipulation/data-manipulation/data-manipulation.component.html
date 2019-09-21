@@ -1,5 +1,5 @@
 <div class="mgr">
-  <div class="line"><app-collapse-menu-file (list1)="getFiles($event)" (selected1)="selectedChangeHandler($event)"></app-collapse-menu-file></div>
+  <div class="line"><app-collapse-menu-file [files]="files" (list1)="getFiles($event)" (selected1)="selectedChangeHandler($event)"></app-collapse-menu-file></div>
   <div class="line"><app-collapse-menu-category></app-collapse-menu-category></div>
   <div class="line"><app-collapse-menu-group></app-collapse-menu-group></div>
   <div class="line"><app-save-button (selectedSet)="setSubmit($event)"></app-save-button></div>

@@ -5,6 +5,7 @@ import { Category } from 'src/app/_models/category';
 import { Group } from 'src/app/_models/group';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { FileRest } from 'src/app/_models/fileRest';
 
 
 @Injectable({
@@ -14,13 +15,12 @@ export class DataManipulationService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl: string="http://localhost:3000/api";
+  baseUrl: string="http://localhost:8080/api";
 
-  getFiles(): Observable<File[]>{
+  getFiles(): Observable<FileRest[]>{
     return this.http.get(this.baseUrl+'/files').pipe(map(
-    (res:any)=>(res.data as File[])
+        (res)=>{return (res as FileRest[]);}
     ));
-
   }
   getCategories(): Observable<Category[]>{
      return this.http.get(this.baseUrl+'/categories').pipe(map(

@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ChangeDetectorRef, ViewChild  } from '@angular/core';
+import { Component, ElementRef, OnInit, ChangeDetectorRef, OnDestroy, ViewChild,
+  AfterViewInit  } from '@angular/core';
 import { Point } from 'src/app/_models/point';
 import { File } from 'src/app/_models/file';
 import { HighchartsService } from 'src/app/highcharts.service';
@@ -10,14 +11,16 @@ import * as Highcharts from 'highcharts';
   templateUrl: './basic-visualization.component.html',
   styleUrls: ['./basic-visualization.component.css']
 })
-export class BasicVisualizationComponent implements OnInit {
-@ViewChild('charts', {static: false}) public chartEl: ElementRef;
+export class BasicVisualizationComponent implements OnInit, AfterViewInit, OnDestroy {
+@ViewChild('charts', {static: true}) public chartEl: ElementRef;
+
+  chartsList;
   uploadedFile: File;
 
   myOpts = {
       series: [{
           name: 'Installation',
-          data: [[1,2], [2,3], [4,2]]
+          data: []
       }]
   }
 
@@ -25,6 +28,12 @@ export class BasicVisualizationComponent implements OnInit {
     }
 
   ngOnInit() {
+  }
+
+  public ngAfterViewInit() {
+  }
+
+  public ngOnDestroy() {
   }
 
   onChange(file:any){
@@ -60,10 +69,24 @@ export class BasicVisualizationComponent implements OnInit {
         this.myOpts.series[0].data.push([+point.x, +point.y])
     }
     console.log(this.myOpts)
+
     this.createCustomChart(this.myOpts);
   }
 
   createCustomChart(myOpts: Object) {
     this.hcs.createChart(this.chartEl.nativeElement, myOpts);
+  }
+
+  rmFirst() {
+    this.hcs.removeFirst();
+    this.changeDetectionRef.detectChanges();
+    console.log('rm first', this.hcs.getCharts());
+  }
+
+
+  rmLast() {
+    this.hcs.removeLast();
+    this.changeDetectionRef.detectChanges();
+    console.log('rm last', this.hcs.getCharts());
   }
 }

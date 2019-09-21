@@ -1,8 +1,8 @@
 <div class="mgr">
-<div class="line"><app-dropdown-file-search (list4)="getFilesFromSet()"(selectedSet)="selectedChangeHandler($event)"></app-dropdown-file-search></div>
+<div class="line"><app-dropdown-file-search [files]="files" (list4)="getFilesFromSet()"(selectedSet)="selectedChangeHandler($event)"></app-dropdown-file-search></div>
 <div class="line"><app-chart (plot)="generateChart($event)"></app-chart></div>
 <div class="line"><app-downloader></app-downloader></div>
 
-<app-displayed-chart></app-displayed-chart>
+  <div #charts id="test"></div>
 <app-description></app-description>
 </div>
