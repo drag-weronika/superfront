@@ -1,7 +1,7 @@
 <div class="mgr">
   <div class="line"><app-collapse-menu-file [files]="files" (list1)="getFiles($event)" (selected1)="selectedChangeHandler($event)"></app-collapse-menu-file></div>
-  <div class="line"><app-collapse-menu-category></app-collapse-menu-category></div>
-  <div class="line"><app-collapse-menu-group></app-collapse-menu-group></div>
+  <div class="line"><app-collapse-menu-category [categories]="categories" (list2)="getCategories($event)" (selected2)="selectedChangeHandler($event)" ></app-collapse-menu-category></div>
+  <div class="line"><app-collapse-menu-group [groups]="groups" (list3)="getGroups($event)" (selected3)="selectedChangeHandler($event)"></app-collapse-menu-group></div>
   <div class="line"><app-save-button (selectedSet)="setSubmit($event)"></app-save-button></div>
   <div class="right">
     <app-category-creator></app-category-creator>

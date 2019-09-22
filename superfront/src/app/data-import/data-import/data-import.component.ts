@@ -3,7 +3,7 @@ import { Point } from 'src/app/_models/point';
 import { HttpClient, HttpHeaders, HttpResponse, HttpRequest,HttpEventType } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FileRest } from 'src/app/_models/fileRest';
-
+import { File } from 'src/app/_models/file';
 
 import { DataImportService } from 'src/app/data-import/data-import.service';
 
@@ -17,12 +17,14 @@ export class DataImportComponent implements OnInit {
 
   uploadPercent:number=0;
   fileToUpload: FileRest;
+  fileToGetName: File;
+  fileToSave: File;
 
   constructor(private dataImportService: DataImportService){}
 
    onChange(theFile){
        this.fileToUpload = new FileRest();
-
+       this.fileToGetName=new File();
        console.log("zaladowano plik")
        this.uploadDocument(theFile);
 

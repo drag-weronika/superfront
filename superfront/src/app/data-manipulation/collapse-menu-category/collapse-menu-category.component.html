@@ -1,11 +1,9 @@
 <div>
   <div class="description">
-    <label>Set category:</label>
+    <label>Choose category:</label>
   </div>
-  <select (change)="filterCategory($event.target.value)">
-    <option value="0">-----None-----</option>
-    <option *ngFor="let category of categories" value={{summary}}>
-      {{category.categoryName}}
-    </option>
+  <select (click)="requestList2()" (change)="emitSelected2($event.target.value)">
+    <option  value="0">-----None-----</option>
+    <option *ngFor="let category of categories" value={{category.categoryId}}>{{category.categoryName}}</option>
   </select>
 </div>

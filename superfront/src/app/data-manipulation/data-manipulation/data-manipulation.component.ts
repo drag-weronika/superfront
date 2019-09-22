@@ -19,6 +19,9 @@ export class DataManipulationComponent implements OnInit {
   selectedGroup: Group;
 
   files: FileRest[];
+  categories: Category[];
+  groups: Group[];
+
   constructor(public dataManipulationService: DataManipulationService ) { }
 
   getFiles(){
@@ -26,9 +29,20 @@ export class DataManipulationComponent implements OnInit {
     (files : FileRest[]) => { this.files = files;
     console.log(this.files[0].fileName);}
     )
-
-
   }
+
+  getGoups(){
+      this.dataManipulationService.getGroups().subscribe(
+      (groups : Group[]) => { this.groups = groups;
+      console.log(this.groups[0].groupName);}
+      )
+    }
+    getCategories(){
+        this.dataManipulationService.getCategories().subscribe(
+        (categories : Category[]) => { this.categories = categories;
+        console.log(this.categories[0].categoryName);}
+        )
+      }
   selectChangeHandler (event: any) {
       this.selectedFile = event.target.value;
   }

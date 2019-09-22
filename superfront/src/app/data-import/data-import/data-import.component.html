@@ -3,7 +3,7 @@
   <app-uploader (value1)="onChange($event)"></app-uploader>
 </div>
 <div class="toolbar">
-  <app-name-setter (value2)="setName($event)"></app-name-setter>
+  <app-name-setter *ngIf="fileToGetName" (value2)="setName($event)"></app-name-setter>
 </div>
   <div class="toolbar">
   <app-saver (value3)="fileSubmit($event)"></app-saver>

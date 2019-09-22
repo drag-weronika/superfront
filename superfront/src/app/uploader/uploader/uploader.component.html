@@ -1,5 +1,5 @@
 <form style="display:inline-block;margin:0 auto;"  id='uploadForm' (ngSubmit)="fileSubmit()" enctype="multipart/form-data">
   <input   type="file" name="userFile"  (change)="emitValue1($event.target.files[0])" />
-  <input type='submit' value='Upload' />
-  {{uploadPercent}}%
+
+
 </form>

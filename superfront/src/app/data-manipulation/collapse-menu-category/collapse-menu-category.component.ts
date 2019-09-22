@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
+import { Category } from 'src/app/_models/category';
 
 @Component({
   selector: 'app-collapse-menu-category',
@@ -7,7 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CollapseMenuCategoryComponent implements OnInit {
 
-  constructor() { }
+ @Input() categories: Category[];
+     @Output() list2=new EventEmitter<any>();
+     @Output() selected2=new EventEmitter<any>();
+
+     constructor() { }
+
+     requestList2(){
+       console.log("categoryReq")
+       this.list2.emit(null);
+     }
+
+     emitSelected2(val){
+       console.log(this.categories)
+       console.log("categoryEmit")
+       this.selected2.emit(val);
+     }
 
   ngOnInit() {
   }

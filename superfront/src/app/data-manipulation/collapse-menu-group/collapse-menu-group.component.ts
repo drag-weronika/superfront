@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Group } from 'src/app/_models/group';
 
 @Component({
   selector: 'app-collapse-menu-group',
@@ -7,7 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CollapseMenuGroupComponent implements OnInit {
 
-  constructor() { }
+  @Input() groups: Group[];
+    @Output() list3=new EventEmitter<any>();
+    @Output() selected3=new EventEmitter<any>();
+
+    constructor() { }
+
+    requestList3(){
+      console.log("groupReq")
+      this.list3.emit(null);
+    }
+
+    emitSelected3(val){
+      console.log(this.groups)
+      console.log("groupEmit")
+      this.selected3.emit(val);
+    }
+
 
   ngOnInit() {
   }

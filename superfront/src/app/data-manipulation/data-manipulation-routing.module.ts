@@ -5,7 +5,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { DataManipulationComponent } from './data-manipulation/data-manipulation.component';
 
 const routes: Routes = [
-      {path: '', component: DataManipulationComponent}
+      {path: '', component: DataManipulationComponent},
+      {path: 'createGroup', component: DataManipulationComponent},
+      {path: 'createCategory', component: DataManipulationComponent}
 
 ];
 
