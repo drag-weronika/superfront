@@ -5,17 +5,15 @@
     <p>Please fill in this form to create an account.</p>
 
     <div class="line"><label for="email"><b>Email</b></label></div>
-    <div class="line"> <input type="text" placeholder="Enter Email" name="email" required></div>
+    <div class="line"> <input type="text" placeholder="Enter Email" name="email" required (keyup)="updateEmail($event.target.value)"></div>
   <div class="line"><label for="psw"><b>Password</b></label></div>
-    <div class="line"> <input type="password" placeholder="Enter Password" name="psw" required></div>
+    <div class="line"> <input type="password" placeholder="Enter Password" name="psw" required (keyup)="updatePassword($event.target.value)"></div>
   <div class="line"><label for="psw-repeat"><b>Repeat Password</b></label></div>
-    <div class="line">  <input type="password" placeholder="Repeat Password" name="psw-repeat" required></div>
-
+    <div class="line">  <input type="password" placeholder="Repeat Password" name="psw-repeat" required (keyup)="updateRepeatedPassword($event.target.value)"></div>
     <hr>
-
-    <button type="submit" class="registerbtn">Register</button>
   </div>
-
-
 </form>
+
+  <button type="submit" (click)="registerUser()" class="registerbtn">Register</button>
+  <p class="redalert" *ngIf="errorOccurred()">Registration error</p>
 </div>

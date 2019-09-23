@@ -3,12 +3,13 @@
   <div class="auth">
 
     <div class="line"><label for="email"><b>Email</b></label></div>
-    <div class="line"> <input type="text" placeholder="Enter Email" name="email" required></div>
+    <div class="line"> <input type="text" placeholder="Enter Email" name="email" required (keyup)="updateEmail($event.target.value)"></div>
     <br/>
     <div class="line"><label for="psw"><b>Password</b></label></div>
-    <div class="line"> <input type="password" placeholder="Enter Password" name="psw" required></div>
+    <div class="line"> <input type="password" placeholder="Enter Password" name="psw" required (keyup)="updatePassword($event.target.value)"></div>
     <br/>
-    <button type="submit" class="registerbtn">Login in</button>
+    <button type="submit" (click)="login()" class="registerbtn">Login in</button>
+    <p class="redalert" *ngIf="errorOccurred()">Invalid login or password!!!</p>
 
     <div class="register">
       <P>Don't have an account yet?</P>

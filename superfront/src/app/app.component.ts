@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'superfront';
+
+  constructor(private authService: AuthService) {
+  }
+
+  isLogged() {
+    return this.authService.isUserLoggedIn();
+  }
+
+  logOut() {
+    this.authService.logOut();
+  }
 }

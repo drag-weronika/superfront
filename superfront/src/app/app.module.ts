@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthModule } from './auth/auth.module';
 import { BasicModule} from './basic/basic.module';
@@ -17,6 +17,7 @@ import { UploaderModule } from './uploader/uploader.module';
 import { ExporterModule } from './exporter/exporter.module';
 import { DownloaderModule } from './downloader/downloader.module';
 import { HighchartsService } from './highcharts.service';
+import { BasicAuthHtppInterceptorService } from './basicAuthHtppInterceptor.service';
 
 import { DataService } from './data.service';
 
@@ -42,7 +43,11 @@ import { DataService } from './data.service';
 
 
   ],
-  providers: [HighchartsService],
+  providers: [HighchartsService,
+  {
+      provide:HTTP_INTERCEPTORS, useClass:BasicAuthHtppInterceptorService, multi:true
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

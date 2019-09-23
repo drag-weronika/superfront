@@ -6,8 +6,12 @@
     <img src="img/logo.jpg" alt="LogoImageError">
     </div>
     <div class="hrs">
-      <button>
+      <button *ngIf="!isLogged()">
         <a routerLink="/auth">Log in</a>
+      </button>
+
+      <button *ngIf="isLogged()" (click)="logOut()">
+        <a routerLink="/auth">Log out</a>
       </button>
     </div>
 
