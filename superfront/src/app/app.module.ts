@@ -11,6 +11,8 @@ import { DataImportModule } from './data-import/data-import.module';
 import { DataManipulationModule } from './data-manipulation/data-manipulation.module';
 import { DataVisualizationModule } from './data-visualization/data-visualization.module';
 import { PublicationsModule } from './publications/publications.module';
+import { StatisticModule } from './statistic/statistic.module';
+
 
 import { CreatorModule } from './creator/creator.module';
 import { UploaderModule } from './uploader/uploader.module';
@@ -18,6 +20,7 @@ import { ExporterModule } from './exporter/exporter.module';
 import { DownloaderModule } from './downloader/downloader.module';
 import { HighchartsService } from './highcharts.service';
 import { BasicAuthHtppInterceptorService } from './basicAuthHtppInterceptor.service';
+
 
 import { DataService } from './data.service';
 
@@ -39,7 +42,8 @@ import { DataService } from './data.service';
     CreatorModule,
     UploaderModule,
     ExporterModule,
-    DownloaderModule
+    DownloaderModule,
+    StatisticModule
 
 
   ],

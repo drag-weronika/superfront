@@ -1,5 +1,4 @@
-import { Component, ElementRef, OnInit, ChangeDetectorRef, OnDestroy, ViewChild,
-                      AfterViewInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ChangeDetectorRef, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { DataVisualizationService }from 'src/app/data-visualization/data-visualization.service';
 import { FileRest } from 'src/app/_models/fileRest';
 import { File } from 'src/app/_models/file';
