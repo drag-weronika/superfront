@@ -4,24 +4,26 @@
 <form  style="display:inline-block;margin:0 auto;"  id='fileNameForm'  enctype="multipart/form-data">
   <p>Set name of the group</p>
   <input  type="text" name="fileName"   (keyup)="emitValue2($event.target.value)" />
-
 </form>
 
-</div>
 <br/>
-<div class="chips-input-container" align='center' >
 
-  <div class="user-chip" *ngFor="let user of selectedUsers">
-    {{user.name}}
-    <span (click)="deleteSelects(user)" class="delete-icon-chip">&#10006;</span>
+  <div class="autocomplete">
+    <div class="chips-input-container">
+      <div class="user-chip" *ngFor="let user of userSelects">
+        {{user.email}}
+        <span (click)="deleteSelects(user)" class="delete-icon-chip">&#10006;</span>
+      </div>
+
+      <input name="suggestion" type="text" placeholder="User" (click)="suggest()" [(ngModel)]="userSelectsString">
+    </div>
+
+    <div class="autocomplete-items" *ngIf="show">
+      <div *ngFor="let s of suggestions" [ngClass]="isSelected(s) ? 'selected-suggestion' : ''" (click)="selectSuggestion(s)">{{ s.email }}</div>
+    </div>
   </div>
 
-  <input name="suggestion" type="text" placeholder="User" (click)="suggest()" [(ngModel)]="userSelectsString">
 
-</div>
-  <div class="autocomplete-items" *ngIf="show">
-   <div *ngFor="let s of suggestions" [ngClass]="isSelected(s) ? 'selected-suggestion' : ''" (click)="selectSuggestion(s)">{{ s.name }}</div>
-  </div>
-<div>
 <button class='btn-bot' (click)="cancel()">Go Back</button>
+
 </div>

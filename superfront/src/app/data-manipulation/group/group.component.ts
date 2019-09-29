@@ -11,11 +11,14 @@ import { UserRest } from 'src/app/_models/userRest';
 export class GroupComponent implements OnInit {
 
   @Input() usersBedzie: UserRest[];
-  @Input() userSelects: UserRest[];
+  @Input() userSelectsBedzie: UserRest[];
   @Input() userSelectsString: string;
 
   show: boolean = false;
-  suggestions=[{"id":"001","email":"mango"},{"id":"002","email":"apple"}];
+  userSelects=[];
+  suggestions=[{"id":"001","email":"drag.weronika@gmail.com"},
+  {"id":"002","email":"kowalski.jan@op.pl"},
+  {"id":"003","email":"rys.jacek@onet.pl"}];
 
   constructor(private location: Location) { }
 

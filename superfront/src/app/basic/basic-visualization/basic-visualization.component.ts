@@ -19,7 +19,7 @@ export class BasicVisualizationComponent implements OnInit, AfterViewInit, OnDes
 
   myOpts = {
       series: [{
-          name: 'Installation',
+          name: '',
           data: []
       }]
   }
