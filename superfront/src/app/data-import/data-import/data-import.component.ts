@@ -17,8 +17,8 @@ export class DataImportComponent implements OnInit {
 
   uploadPercent:number=0;
   fileToUpload: FileRest;
-  fileToUpload1: Point[];
-
+  fileToUpload1: File;
+  fileContent: Point[];
   fileToGetName: File;
   fileToSave: File;
 
@@ -36,15 +36,25 @@ export class DataImportComponent implements OnInit {
           point.y = tarr[1];
           this.fileToUpload1.fileContent.push(point);
       }
+      console.log(this.fileToUpload1.fileContent);
   }
+
+  parseFile(file) {
+      let fileReader = new FileReader();
+      fileReader.onload = (e) => {
+          this.readCsv(fileReader.result);
+      }
+      fileReader.readAsText(file);
+    }
 
    onChange(theFile){
        this.fileToUpload = new FileRest();
        this.fileToGetName=new File();
        console.log("zaladowano plik")
-       this.uploadDocument(theFile);
-       this.readCsv(theFile);
-
+       this.fileToUpload1=new File();
+       this.fileToUpload1.fileContent = [];
+       this.parseFile(theFile);
+        console.log("hejka");
    }
 
       uploadDocument(file) {
