@@ -18,23 +18,24 @@ export class DataImportComponent implements OnInit {
   uploadPercent:number=0;
   fileToUpload: FileRest;
   fileToUpload1: File;
-  fileContent: Point[];
+  point: Point;
   fileToGetName: File;
   fileToSave: File;
 
   constructor(private dataImportService: DataImportService){}
 
   readCsv(content) {
+
       let allTextLines = content.split(/\r\n/);
       for (let i = 0; i < allTextLines.length; i++) {
           let data = allTextLines[i].split(',');
           let tarr = [];
           tarr.push(data[0]);
           tarr.push(data[1]);
-          let point = new Point();
-          point.x = tarr[0];
-          point.y = tarr[1];
-          this.fileToUpload1.fileContent.push(point);
+          this.point = new Point();
+          this.point.x = tarr[0];
+          this.point.y = tarr[1];
+          this.fileToUpload1.fileContent.push(this.point);
       }
       console.log(this.fileToUpload1.fileContent);
   }

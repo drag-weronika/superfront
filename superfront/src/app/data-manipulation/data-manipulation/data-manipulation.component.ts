@@ -7,6 +7,7 @@ import { File } from 'src/app/_models/file';
 import { FileRest } from 'src/app/_models/fileRest';
 import { Category } from 'src/app/_models/category';
 import { Group } from 'src/app/_models/group';
+import { UserRest } from 'src/app/_models/userRest';
 
 @Component({
   selector: 'app-data-manipulation',
@@ -17,10 +18,14 @@ export class DataManipulationComponent implements OnInit {
   selectedFile: File;
   selectedCategory: Category;
   selectedGroup: Group;
+  selectedUser: UserRest;
+  userSelects: UserRest[];
 
   files: FileRest[];
   categories: Category[];
   groups: Group[];
+  users: UserRest[];
+  userSelectsString = '';
 
   constructor(public dataManipulationService: DataManipulationService ) { }
 
@@ -37,12 +42,21 @@ export class DataManipulationComponent implements OnInit {
       console.log(this.groups[0].groupName);}
       )
     }
-    getCategories(){
+  getCategories(){
         this.dataManipulationService.getCategories().subscribe(
         (categories : Category[]) => { this.categories = categories;
         console.log(this.categories[0].categoryName);}
         )
-      }
+  }
+
+  getUsers(){
+    this.dataManipulationService.getUsers().subscribe(
+            (users : UserRest[]) => { this.users = users;
+            console.log(this.users[0].email);}
+            )
+
+  }
+
   selectChangeHandler (event: any) {
       this.selectedFile = event.target.value;
   }
@@ -56,6 +70,7 @@ export class DataManipulationComponent implements OnInit {
             (event)=>{}
             );
   }
+
 
 
 

@@ -12,6 +12,7 @@ import { CreatorModule}  from 'src/app/creator/creator.module';
 import { GroupCreatorComponent}  from 'src/app/creator/group-creator/group-creator.component';
 import { CategoryCreatorComponent}  from 'src/app/creator/category-creator/category-creator.component';
 import { GroupComponent } from './group/group.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -20,7 +21,8 @@ import { GroupComponent } from './group/group.component';
   imports: [
     CommonModule,
     DataManipulationRoutingModule,
-    CreatorModule
+    CreatorModule,
+    FormsModule
   ],
   exports: [CollapseMenuFileComponent]
 })
