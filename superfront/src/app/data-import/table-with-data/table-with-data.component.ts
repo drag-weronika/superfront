@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class TableWithDataComponent implements OnInit {
 
-  @Input() fileToUpload1: File;
+  @Input() fileToUpload1: Point[];
 
   constructor() { }
 

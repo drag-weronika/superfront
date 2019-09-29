@@ -18,7 +18,7 @@ export class DataImportComponent implements OnInit {
   uploadPercent:number=0;
   fileToUpload: FileRest;
   fileToUpload1: Point[];
-  
+
   fileToGetName: File;
   fileToSave: File;
 

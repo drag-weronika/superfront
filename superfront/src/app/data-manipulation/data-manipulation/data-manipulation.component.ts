@@ -56,6 +56,9 @@ export class DataManipulationComponent implements OnInit {
             (event)=>{}
             );
   }
+
+
+
   ngOnInit() {
 
   }

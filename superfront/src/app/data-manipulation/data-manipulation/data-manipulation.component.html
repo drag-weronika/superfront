@@ -5,7 +5,9 @@
   <div class="line"><app-save-button (selectedSet)="setSubmit($event)"></app-save-button></div>
   <div class="right">
     <app-category-creator></app-category-creator>
-    <app-group-creator></app-group-creator>
+    <br/>
+    <button><a routerLink="/data-manipulation/group">+Create group</a></button>
+    <router-outlet></router-outlet>
   </div>
 </div>
 
