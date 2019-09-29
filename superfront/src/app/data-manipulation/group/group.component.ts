@@ -46,9 +46,7 @@ export class GroupComponent implements OnInit {
       this.userSelects.map((item) => this.userSelectsString += item.email + ' ');
     }
 
-  cancel() {
-      this.location.back(); // <-- go back to previous location on cancel
-  }
+
 
 
 

@@ -51,17 +51,20 @@ export class DataImportComponent implements OnInit {
    onChange(theFile){
        this.fileToUpload = new FileRest();
        this.fileToGetName=new File();
+
        console.log("zaladowano plik")
        this.fileToUpload1=new File();
        this.fileToUpload1.fileContent = [];
        this.parseFile(theFile);
         console.log("hejka");
+        this.uploadDocument(theFile);
    }
 
       uploadDocument(file) {
              let fileReader = new FileReader();
              fileReader.onload = (e) => {
                this.fileToUpload.content = fileReader.result as string
+               console.log("XXXXXXXXXXXX"+this.fileToUpload.content);
              }
              fileReader.readAsText(file);
          }

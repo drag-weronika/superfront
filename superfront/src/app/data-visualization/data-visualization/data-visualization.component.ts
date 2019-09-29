@@ -14,7 +14,7 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
     @ViewChild('charts', {static: false}) public chartEl: ElementRef;
   myOpts = {
       series: [{
-          name: 'Installation',
+          name: 'X',
           data: []
       }]
   }
