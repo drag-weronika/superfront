@@ -14,12 +14,14 @@ import { PublicationsModule } from './publications/publications.module';
 import { StatisticModule } from './statistic/statistic.module';
 
 
+
 import { CreatorModule } from './creator/creator.module';
 import { UploaderModule } from './uploader/uploader.module';
 import { ExporterModule } from './exporter/exporter.module';
 import { DownloaderModule } from './downloader/downloader.module';
 import { HighchartsService } from './highcharts.service';
 import { BasicAuthHtppInterceptorService } from './basicAuthHtppInterceptor.service';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 import { DataService } from './data.service';
@@ -43,7 +45,8 @@ import { DataService } from './data.service';
     UploaderModule,
     ExporterModule,
     DownloaderModule,
-    StatisticModule
+    StatisticModule,
+    NgMultiSelectDropDownModule.forRoot()
 
 
   ],

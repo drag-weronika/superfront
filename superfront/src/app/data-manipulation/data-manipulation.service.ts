@@ -49,14 +49,16 @@ export class DataManipulationService {
        return this.http.post(this.baseUrl, JSON.stringify(group),options);
      }
 
-      addCategory(category){
-            let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-            let options = {
-                  headers: headers
-               };
-         console.log(JSON.stringify(category))
-          return this.http.post(this.baseUrl, JSON.stringify(category),options);
-        }
+    addCategory(category){
+          let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+          let options = {
+                headers: headers
+             };
+       console.log(JSON.stringify(category))
+        return this.http.post(this.baseUrl, JSON.stringify(category),options);
+    }
+
+
 
 
 }

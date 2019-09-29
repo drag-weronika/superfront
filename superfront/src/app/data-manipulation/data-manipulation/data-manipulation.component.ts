@@ -57,6 +57,8 @@ export class DataManipulationComponent implements OnInit {
             );
   }
   ngOnInit() {
+
   }
+
 
 }

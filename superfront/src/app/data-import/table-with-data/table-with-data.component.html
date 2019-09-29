@@ -1,4 +1,4 @@
-<table *ngIf="fileToUpload.fileContent && fileToUpload.fileContent.length" style="width:80%">
+<table *ngIf="fileToUpload1.fileContent && fileToUpload1.fileContent.length" style="width:80%">
   <thead>
   <tr>
     <th>X value</th>
@@ -6,9 +6,9 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let point of fileToUpload.fileContent">
-    <td>{{fileToUpload.fileContent.point.x}}</td>
-    <td>{{fileToUpload.fileContent.point.y}}</td>
+  <tr *ngFor="let point of fileToUpload1.fileContent">
+    <td>{{fileToUpload1.fileContent.point.x}}</td>
+    <td>{{fileToUpload1.fileContent.point.y}}</td>
   </tr>
   </tbody>
 </table>

@@ -13,6 +13,7 @@ import { GroupCreatorComponent}  from 'src/app/creator/group-creator/group-creat
 import { CategoryCreatorComponent}  from 'src/app/creator/category-creator/category-creator.component';
 
 
+
 @NgModule({
   declarations: [DataManipulationComponent, CollapseMenuFileComponent, CollapseMenuGroupComponent, CollapseMenuCategoryComponent, SaveButtonComponent],
   imports: [
