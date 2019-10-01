@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Location } from '@angular/common';
 import { UserRest } from 'src/app/_models/userRest';
-
+import {DataManipulationService} from 'src/app/data-manipulation/data-manipulation.service';
+import { Group } from 'src/app/_models/group';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-group',
@@ -9,36 +11,33 @@ import { UserRest } from 'src/app/_models/userRest';
   styleUrls: ['./group.component.css']
 })
 export class GroupComponent implements OnInit {
-
-  @Input() usersBedzie: UserRest[];
-  @Input() userSelectsBedzie: UserRest[];
-  @Input() userSelectsString: string;
+  users: UserRest[];
+  userSelectsString: string;
 
   show: boolean = false;
   userSelects=[];
-  suggestions=[{"id":"001","email":"drag.weronika@gmail.com"},
-  {"id":"002","email":"kowalski.jan@op.pl"},
-  {"id":"003","email":"rys.jacek@onet.pl"}];
+  suggestions=[];
+  groupName = "";
 
-  constructor(private location: Location) { }
+  constructor(public dataManipulationService: DataManipulationService, private router: Router) { }
 
   suggest() {
      this.show = true;
   }
 
    isSelected(s:any) {
-      return this.userSelects.findIndex((item) => item.id === s.id) > -1 ? true : false;
+      return this.userSelects.findIndex((item) => item.userId === s.userId) > -1 ? true : false;
      }
 
      selectSuggestion(s) {
-       this.userSelects.find((item) => item.id === s.id) ?
-       this.userSelects = this.userSelects.filter((item) => item.id !== s.id) :
+       this.userSelects.find((item) => item.userId === s.userId) ?
+       this.userSelects = this.userSelects.filter((item) => item.userId !== s.userId) :
        this.userSelects.push(s);
        // this.assignToNgModel();
      }
 
     deleteSelects(s) {
-      this.userSelects = this.userSelects.filter((item) => item.id !== s.id);
+      this.userSelects = this.userSelects.filter((item) => item.userId !== s.userId);
       // this.assignToNgModel();
     }
     assignToNgModel() {
@@ -46,11 +45,42 @@ export class GroupComponent implements OnInit {
       this.userSelects.map((item) => this.userSelectsString += item.email + ' ');
     }
 
+  getUsers(){
+    this.dataManipulationService.getUsers().subscribe(
+            (users : UserRest[]) => {
+            this.users = users;
+            this.suggestions = users.filter((item) => item.email !== sessionStorage.getItem('username'))
+            })
 
+  }
 
+  setGroupName(name: any){
+   this.groupName = name;
+  }
 
+  sendGroup(){
+    console.log("AAAAAAA")
+    let group= new Group();
+    group.groupName = this.groupName;
+    group.userIds = [];
+
+    for(var i = 0; i < this.userSelects.length; i++) {
+      group.userIds.push(this.userSelects[i].userId);
+    }
+
+    console.log(this.users.filter((item) => item.email === sessionStorage.getItem('username')))
+
+    group.ownerId = this.users.filter((item) => item.email === sessionStorage.getItem('username'))[0].userId;
+    group.userIds.push(group.ownerId)
+    this.dataManipulationService.addGroup(group).subscribe(
+         data => {
+             this.router.navigateByUrl('/data-manipulation');
+         }
+     );
+  }
 
   ngOnInit() {
+    this.getUsers();
   }
 
 }

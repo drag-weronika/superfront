@@ -37,7 +37,7 @@ export class DataManipulationService {
   }
 
   getUsers(): Observable<UserRest[]>{
-      return this.http.get(this.baseUrl+'/usersGroup').pipe(map(
+      return this.http.get(this.baseUrl+'/users').pipe(map(
           (res)=>{return (res as UserRest[]);}
       ));
     }
@@ -53,7 +53,7 @@ export class DataManipulationService {
                headers: headers
             };
       console.log(JSON.stringify(group))
-       return this.http.post(this.baseUrl, JSON.stringify(group),options);
+       return this.http.post(this.baseUrl+'/groups', JSON.stringify(group),options);
      }
 
     addCategory(category){

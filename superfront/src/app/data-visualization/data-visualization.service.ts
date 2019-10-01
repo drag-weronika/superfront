@@ -18,6 +18,15 @@ export class DataVisualizationService {
     ));
   }
 
+  updateFile(fileRest){
+      let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+      let options = {
+            headers: headers
+         };
+      console.log(JSON.stringify(fileRest))
+    return this.http.put(this.baseUrl+'/files', JSON.stringify(fileRest),options);
+  }
+
   getSet(id:number){
     return this.http.get(this.baseUrl+'/set/${id}');
   }

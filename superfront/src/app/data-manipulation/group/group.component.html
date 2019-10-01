@@ -3,7 +3,7 @@
 <div class='Center' align='center'>
 <form  style="display:inline-block;margin:0 auto;"  id='fileNameForm'  enctype="multipart/form-data">
   <p>Set name of the group</p>
-  <input  type="text" name="fileName"   (keyup)="emitValue2($event.target.value)" />
+  <input  type="text" name="fileName"   (keyup)="setGroupName($event.target.value)" />
 </form>
 
 <br/>
@@ -22,8 +22,6 @@
       <div *ngFor="let s of suggestions" [ngClass]="isSelected(s) ? 'selected-suggestion' : ''" (click)="selectSuggestion(s)">{{ s.email }}</div>
     </div>
   </div>
-
-
-
+  <button class="btn-bot" (click)="sendGroup()">+Create group</button>
 
 </div>

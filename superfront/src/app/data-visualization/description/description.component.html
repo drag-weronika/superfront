@@ -1,4 +1,4 @@
 <div class="box-for-description">
-<input type="text">
-  <app-sharing></app-sharing>
+<input type="text" (keyup)="setDescription($event.target.value)">
+  <button (click)="shareChartWithDescription()">Add description and share chart</button>
 </div>

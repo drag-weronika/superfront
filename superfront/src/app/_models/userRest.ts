@@ -1,5 +1,5 @@
 export class UserRest {
-id: number;
+userId: number;
 email: string;
 password: string;
 repeatedPassword: string;

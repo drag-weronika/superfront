@@ -17,7 +17,8 @@ export class DropdownFileSearchComponent implements OnInit {
     this.list4.emit(null);
   }
 
-  emitSelectedSet(val){
+  emitSelectedSet(val: any){
+      console.log("emit" + val)
       this.selectedSet.emit(val);
   }
 

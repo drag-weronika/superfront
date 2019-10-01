@@ -27,7 +27,9 @@ export class DataManipulationComponent implements OnInit {
   users: UserRest[];
   userSelectsString = '';
 
-  constructor(public dataManipulationService: DataManipulationService ) { }
+  constructor(public dataManipulationService: DataManipulationService ) {
+
+  }
 
   getFiles(){
     this.dataManipulationService.getFiles().subscribe(
@@ -49,14 +51,6 @@ export class DataManipulationComponent implements OnInit {
         )
   }
 
-  getUsers(){
-    this.dataManipulationService.getUsers().subscribe(
-            (users : UserRest[]) => { this.users = users;
-            console.log(this.users[0].email);}
-            )
-
-  }
-
   selectChangeHandler (event: any) {
       this.selectedFile = event.target.value;
   }
@@ -75,7 +69,6 @@ export class DataManipulationComponent implements OnInit {
 
 
   ngOnInit() {
-
   }
 
 

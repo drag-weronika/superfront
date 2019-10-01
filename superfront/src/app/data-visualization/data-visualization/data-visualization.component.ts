@@ -30,16 +30,19 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
   getFilesFromSet(){
       this.dataVisualizationService.getFiles().subscribe(
       (files : FileRest[]) => { this.files = files;
-      console.log(this.files[0].fileName);}
-      )
+      console.log(this.files);
+      })
   }
 
-  selectedChangeHandler (event: any) {
-
+  selectedChangeHandler (event: number) {
+    let fileRest = this.files.filter((item) => item.fileId == event)[0];
+    console.log("files " + fileRest)
     this.selectedFile = new File()
     this.selectedFile.fileContent = []
+    console.log(event)
+    this.selectedFile.fileId = fileRest.fileId;
 
-    this.readCsv(event)
+    this.readCsv(fileRest.content)
   }
 
   readCsv(content) {
