@@ -47,21 +47,32 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
 
   readCsv(content) {
     let allTextLines = content.split(/\r\n/);
+    let xFlag = true;
     for (let i = 0; i < allTextLines.length; i++) {
         let data = allTextLines[i].split(',');
-        let tarr = [];
-        tarr.push(data[0]);
-        tarr.push(data[1]);
         let point = new Point();
-        point.x = tarr[0];
-        point.y = tarr[1];
+
+        if (data.length == 1) {
+            xFlag = false;
+            point.y = data[0];
+        } else {
+            let tarr = [];
+            tarr.push(data[0]);
+            tarr.push(data[1]);
+            point.x = tarr[0];
+            point.y = tarr[1];
+        }
         this.selectedFile.fileContent.push(point)
     }
     console.log(this.selectedFile);
 
     this.myOpts.series[0].data = []
     for (let point of this.selectedFile.fileContent) {
-        this.myOpts.series[0].data.push([+point.x, +point.y])
+        if (xFlag) {
+            this.myOpts.series[0].data.push([+point.x, +point.y])
+        } else {
+            this.myOpts.series[0].data.push([+point.y])
+        }
     }
     console.log(this.myOpts)
 

@@ -15,13 +15,10 @@ export class CollapseMenuCategoryComponent implements OnInit {
      constructor() { }
 
      requestList2(){
-       console.log("categoryReq")
        this.list2.emit(null);
      }
 
      emitSelected2(val){
-       console.log(this.categories)
-       console.log("categoryEmit")
        this.selected2.emit(val);
      }
 

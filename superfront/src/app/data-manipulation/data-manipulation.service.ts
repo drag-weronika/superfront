@@ -62,10 +62,40 @@ export class DataManipulationService {
                 headers: headers
              };
        console.log(JSON.stringify(category))
-        return this.http.post(this.baseUrl, JSON.stringify(category),options);
+        return this.http.post(this.baseUrl + '/categories', JSON.stringify(category),options);
     }
 
+    private modals: any[] = [];
 
+    add(modal: any) {
+        // add modal to array of active modals
+        this.modals.push(modal);
+    }
 
+    remove(id: string) {
+        // remove modal from array of active modals
+        this.modals = this.modals.filter(x => x.id !== id);
+    }
+
+    open(id: string) {
+        // open modal specified by id
+        let modal: any = this.modals.filter(x => x.id === id)[0];
+        modal.open();
+    }
+
+    close(id: string) {
+        // close modal specified by id
+        let modal: any = this.modals.filter(x => x.id === id)[0];
+        modal.close();
+    }
+
+  updateFile(fileRest){
+      let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+      let options = {
+            headers: headers
+         };
+      console.log(JSON.stringify(fileRest))
+    return this.http.put(this.baseUrl+'/files', JSON.stringify(fileRest),options);
+  }
 
 }

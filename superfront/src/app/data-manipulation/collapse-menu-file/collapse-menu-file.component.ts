@@ -15,13 +15,10 @@ export class CollapseMenuFileComponent implements OnInit {
   constructor() { }
 
   requestList1(){
-    console.log("rrrr")
     this.list1.emit(null);
   }
 
   emitSelected1(val){
-    console.log(this.files)
-    console.log("asd")
     this.selected1.emit(val);
   }
 

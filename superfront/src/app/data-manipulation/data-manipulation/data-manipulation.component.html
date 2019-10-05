@@ -1,15 +1,21 @@
 <div class="mgr">
-  <div class="line"><app-collapse-menu-file [files]="files" (list1)="getFiles($event)" (selected1)="selectedChangeHandler($event)"></app-collapse-menu-file></div>
-  <div class="line"><app-collapse-menu-category [categories]="categories" (list2)="getCategories($event)" (selected2)="selectedChangeHandler($event)" ></app-collapse-menu-category></div>
-  <div class="line"><app-collapse-menu-group [groups]="groups" (list3)="getGroups($event)" (selected3)="selectedChangeHandler($event)"></app-collapse-menu-group></div>
+  <div class="line"><app-collapse-menu-file [files]="files" (list1)="getFiles($event)" (selected1)="selectedChangeHandlerFile($event)"></app-collapse-menu-file></div>
+  <div class="line"><app-collapse-menu-category [categories]="categories" (list2)="getCategories($event)" (selected2)="selectedChangeHandlerCategory($event)" ></app-collapse-menu-category></div>
+  <div class="line"><app-collapse-menu-group [groups]="groups" (list3)="getGroups($event)" (selected3)="selectedChangeHandlerGroup($event)"></app-collapse-menu-group></div>
   <div class="line"><app-save-button (selectedSet)="setSubmit($event)"></app-save-button></div>
   <div class="right">
-    <app-category-creator></app-category-creator>
+    <button (click)="openModal('custom-modal-1')">Open Modal 1</button>
     <br/>
     <button><a routerLink="/data-manipulation/group">+Create group</a></button>
     <router-outlet></router-outlet>
   </div>
 </div>
+
+<app-modal id="custom-modal-1">
+  <h1>A Custom Modal!</h1>
+  <p>Home page text: <input type="text" [(ngModel)]="bodyText" /></p>
+  <button (click)="closeModal('custom-modal-1');">Close</button>
+</app-modal>
 
 
 

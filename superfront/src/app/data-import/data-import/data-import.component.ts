@@ -29,13 +29,18 @@ export class DataImportComponent implements OnInit {
       let allTextLines = content.split(/\r\n/);
       for (let i = 0; i < allTextLines.length; i++) {
           let data = allTextLines[i].split(',');
-          let tarr = [];
-          tarr.push(data[0]);
-          tarr.push(data[1]);
-          this.point = new Point();
-          this.point.x = tarr[0];
-          this.point.y = tarr[1];
-          this.fileToUpload1.fileContent.push(this.point);
+          let point = new Point();
+
+          if (data.length == 1) {
+              point.y = data[0];
+          } else {
+              let tarr = [];
+              tarr.push(data[0]);
+              tarr.push(data[1]);
+              point.x = tarr[0];
+              point.y = tarr[1];
+          }
+          this.fileToUpload1.fileContent.push(point);
       }
       console.log(this.fileToUpload1.fileContent);
   }

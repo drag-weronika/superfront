@@ -15,13 +15,10 @@ export class CollapseMenuGroupComponent implements OnInit {
     constructor() { }
 
     requestList3(){
-      console.log("groupReq")
       this.list3.emit(null);
     }
 
     emitSelected3(val){
-      console.log(this.groups)
-      console.log("groupEmit")
       this.selected3.emit(val);
     }
 

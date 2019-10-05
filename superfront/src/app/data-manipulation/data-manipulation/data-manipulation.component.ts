@@ -15,9 +15,9 @@ import { UserRest } from 'src/app/_models/userRest';
   styleUrls: ['./data-manipulation.component.css']
 })
 export class DataManipulationComponent implements OnInit {
-  selectedFile: File;
-  selectedCategory: Category;
-  selectedGroup: Group;
+  selectedFileId: number;
+  selectedCategoryId: number;
+  selectedGroupId: number;
   selectedUser: UserRest;
   userSelects: UserRest[];
 
@@ -33,42 +33,55 @@ export class DataManipulationComponent implements OnInit {
 
   getFiles(){
     this.dataManipulationService.getFiles().subscribe(
-    (files : FileRest[]) => { this.files = files;
-    console.log(this.files[0].fileName);}
-    )
+    (files : FileRest[]) => { this.files = files;})
   }
 
-  getGoups(){
+  getGroups(){
       this.dataManipulationService.getGroups().subscribe(
-      (groups : Group[]) => { this.groups = groups;
-      console.log(this.groups[0].groupName);}
-      )
+      (groups : Group[]) => { this.groups = groups;})
     }
   getCategories(){
         this.dataManipulationService.getCategories().subscribe(
-        (categories : Category[]) => { this.categories = categories;
-        console.log(this.categories[0].categoryName);}
-        )
+        (categories : Category[]) => { this.categories = categories;})
   }
 
-  selectChangeHandler (event: any) {
-      this.selectedFile = event.target.value;
+  selectedChangeHandlerFile (event: any) {
+      this.selectedFileId = event
+  }
+
+  selectedChangeHandlerCategory (event: any) {
+      this.selectedCategoryId = event
+  }
+
+  selectedChangeHandlerGroup (event: any) {
+      this.selectedGroupId = event
   }
 
   setSubmit(){
-      const formData: any = new FormData();
-            formData.append("fileName",this.selectedFile.fileName);
-            formData.append("categoryName",this.selectedCategory.categoryName);
-            formData.append("groupName",this.selectedGroup.groupName);
-            this.dataManipulationService.postSet(formData).subscribe(
-            (event)=>{}
-            );
+    let fileRest = new FileRest();
+    fileRest.fileId = this.selectedFileId;
+    fileRest.groupId = this.selectedGroupId;
+    fileRest.categoryId = this.selectedCategoryId;
+    this.dataManipulationService.updateFile(fileRest).subscribe((event)=>{});
   }
 
 
+    openModal(id: string) {
+        this.dataManipulationService.open(id);
+    }
 
+    closeModal(id: string) {
+        this.dataManipulationService.close(id);
+        let category = new Category();
+        category.categoryName = this.bodyText;
+        this.dataManipulationService.addCategory(category).subscribe(
+                                                                      (event)=>{}
+                                                                      );
+    }
+  bodyText: string;
 
   ngOnInit() {
+    this.bodyText = 'Tgrsdrtgsgn modal 1';
   }
 
 

@@ -13,11 +13,12 @@ import { GroupCreatorComponent}  from 'src/app/creator/group-creator/group-creat
 import { CategoryCreatorComponent}  from 'src/app/creator/category-creator/category-creator.component';
 import { GroupComponent } from './group/group.component';
 import { FormsModule } from '@angular/forms';
+import { ModalComponent } from './modal/modal.component';
 
 
 
 @NgModule({
-  declarations: [DataManipulationComponent, CollapseMenuFileComponent, CollapseMenuGroupComponent, CollapseMenuCategoryComponent, SaveButtonComponent, GroupComponent],
+  declarations: [DataManipulationComponent, CollapseMenuFileComponent, CollapseMenuGroupComponent, CollapseMenuCategoryComponent, SaveButtonComponent, GroupComponent, ModalComponent],
   imports: [
     CommonModule,
     DataManipulationRoutingModule,

@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import * as Highcharts from 'highcharts';
+declare var require: any;
+require('highcharts/highcharts-more')(Highcharts);
+require('highcharts/modules/histogram-bellcurve')(Highcharts);
+
 
 @Injectable()
 export class HighchartsService {
