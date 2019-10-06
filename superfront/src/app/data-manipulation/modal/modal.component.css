@@ -14,6 +14,7 @@
           overflow: auto;
 }
           .app-modal-body {
+              align-content: center;
               padding: 20px;
               background: #fff;
 

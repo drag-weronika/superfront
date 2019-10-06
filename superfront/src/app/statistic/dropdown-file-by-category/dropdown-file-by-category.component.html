@@ -2,7 +2,7 @@
   <div class="description">
     <label>Choose file:</label>
   </div>
-  <select (click)="requestListByCategory()" (change)="emitSelectedByCategory($event.target.value)">
+  <select  (change)="emitSelectedByCategory($event.target.value)">
     <option value="0">-----None-----</option>
     <option *ngFor="let file of filesByCategory" value={{file.fileId}}>{{file.fileName}}</option>
   </select>

@@ -56,6 +56,7 @@ export class StatisticAnalysisComponent implements OnInit, AfterViewInit, OnDest
 
 
   ngOnInit() {
+  this.getFilesByCategory()
   }
       public ngAfterViewInit(){
       }

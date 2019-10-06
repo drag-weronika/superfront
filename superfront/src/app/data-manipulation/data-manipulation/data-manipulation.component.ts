@@ -18,12 +18,14 @@ export class DataManipulationComponent implements OnInit {
   selectedFileId: number;
   selectedCategoryId: number;
   selectedGroupId: number;
+
   selectedUser: UserRest;
   userSelects: UserRest[];
 
   files: FileRest[];
   categories: Category[];
   groups: Group[];
+
   users: UserRest[];
   userSelectsString = '';
 
@@ -81,7 +83,10 @@ export class DataManipulationComponent implements OnInit {
   bodyText: string;
 
   ngOnInit() {
-    this.bodyText = 'Tgrsdrtgsgn modal 1';
+    this.bodyText = '';
+    this.getFiles();
+    this.getGroups();
+    this.getCategories();
   }
 
 

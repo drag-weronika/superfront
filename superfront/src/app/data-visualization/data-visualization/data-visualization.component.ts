@@ -84,11 +84,13 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
   }
 
   ngOnInit() {
+    this.getFilesFromSet();
   }
-    public ngAfterViewInit() {
-    }
+  public ngAfterViewInit() {
+  }
 
-    public ngOnDestroy() {
-    }
+  public ngOnDestroy() {
+  }
+
 
 }

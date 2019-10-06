@@ -62,3 +62,12 @@ app-modal {
       /* body overflow is hidden to hide main scrollbar when modal window is open */
       overflow: hidden;
   }
+
+.btn{
+margin-top: 10px;
+}
+
+.center{
+align-content: center;
+
+}

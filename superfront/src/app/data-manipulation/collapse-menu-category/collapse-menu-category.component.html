@@ -2,7 +2,7 @@
   <div class="description">
     <label>Choose category:</label>
   </div>
-  <select (click)="requestList2()" (change)="emitSelected2($event.target.value)">
+  <select  (change)="emitSelected2($event.target.value)">
     <option  value="0">-----None-----</option>
     <option *ngFor="let category of categories" value={{category.categoryId}}>{{category.categoryName}}</option>
   </select>
