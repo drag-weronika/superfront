@@ -5,3 +5,11 @@ margin-right: 10px;
 .mgr{
 margin: 10px 10px 10px 10px;
 }
+
+.right{
+display: inline-box;
+position: fixed;
+right: 10px;
+margin-right: 10;
+
+}
