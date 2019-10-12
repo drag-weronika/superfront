@@ -14,7 +14,7 @@ export class StatisticAnalysisService {
     constructor(private http:HttpClient) { }
 
     getFiles(): Observable<FileRest[]>{
-      return this.http.get(this.baseUrl+'/files').pipe(map(
+      return this.http.get(this.baseUrl+'/files/' + sessionStorage.getItem('username')).pipe(map(
           (res)=>{return (res as FileRest[]);}
       ));
     }

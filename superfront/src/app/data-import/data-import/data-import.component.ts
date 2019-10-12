@@ -75,6 +75,7 @@ export class DataImportComponent implements OnInit {
              let fileReader = new FileReader();
              fileReader.onload = (e) => {
                this.fileToUpload.content = fileReader.result as string
+               this.fileToUpload.ownerName = sessionStorage.getItem('username');
                console.log("XXXXXXXXXXXX"+this.fileToUpload.content);
              }
              fileReader.readAsText(file);

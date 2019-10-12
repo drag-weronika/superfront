@@ -46,7 +46,7 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
   }
 
   readCsv(content) {
-    let allTextLines = content.split(/\r\n/);
+    let allTextLines = content.split(/\r\n|\n/);
     let xFlag = true;
     for (let i = 0; i < allTextLines.length; i++) {
         let data = allTextLines[i].split(',');

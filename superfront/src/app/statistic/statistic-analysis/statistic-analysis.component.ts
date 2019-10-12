@@ -16,6 +16,7 @@ import { StatisticAnalysisService }from 'src/app/statistic/statistic-analysis.se
 export class StatisticAnalysisComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('charts', {static: false}) public chartEl: ElementRef;
+  @ViewChild('charts2', {static: false}) public chartEl2: ElementRef;
 
   constructor(private hcs: HighchartsService, private changeDetectionRef: ChangeDetectorRef
                              ,private statisticAnalysisService:StatisticAnalysisService) { }
@@ -50,7 +51,7 @@ export class StatisticAnalysisComponent implements OnInit, AfterViewInit, OnDest
             this.createCustomChart(this.myOpts)
 
             this.histogramOpts.series[1].data = data.data;
-            this.createCustomChart(this.histogramOpts)
+            this.createCustomChart2(this.histogramOpts)
         }
     )
   }
@@ -58,6 +59,10 @@ export class StatisticAnalysisComponent implements OnInit, AfterViewInit, OnDest
     createCustomChart(myOpts: Object) {
       this.hcs.createChart(this.chartEl.nativeElement, myOpts);
     }
+
+    createCustomChart2(myOpts: Object) {
+          this.hcs.createChart(this.chartEl2.nativeElement, myOpts);
+        }
 
 
   ngOnInit() {

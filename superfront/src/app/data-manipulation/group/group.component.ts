@@ -64,6 +64,7 @@ export class GroupComponent implements OnInit {
     group.groupName = this.groupName;
     group.userIds = [];
 
+    console.log("user selects length " + this.userSelects.length)
     for(var i = 0; i < this.userSelects.length; i++) {
       group.userIds.push(this.userSelects[i].userId);
     }
@@ -71,7 +72,7 @@ export class GroupComponent implements OnInit {
     console.log(this.users.filter((item) => item.email === sessionStorage.getItem('username')))
 
     group.ownerId = this.users.filter((item) => item.email === sessionStorage.getItem('username'))[0].userId;
-    group.userIds.push(group.ownerId)
+
     this.dataManipulationService.addGroup(group).subscribe(
          data => {
              this.router.navigateByUrl('/data-manipulation');

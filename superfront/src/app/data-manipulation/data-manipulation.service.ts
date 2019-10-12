@@ -19,7 +19,7 @@ export class DataManipulationService {
   baseUrl: string="http://localhost:8080/api";
 
   getFiles(): Observable<FileRest[]>{
-    return this.http.get(this.baseUrl+'/files').pipe(map(
+    return this.http.get(this.baseUrl+'/files/' + sessionStorage.getItem('username')).pipe(map(
         (res)=>{return (res as FileRest[]);}
     ));
   }
