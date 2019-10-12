@@ -22,6 +22,10 @@ export class DropdownFileSearchComponent implements OnInit {
       this.selectedSet.emit(val);
   }
 
+  getName(file: FileRest) {
+    return file.fileName + "-" + file.ownerName;
+  }
+
   ngOnInit() {
   }
 

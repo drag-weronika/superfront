@@ -21,8 +21,14 @@ export class DataImportComponent implements OnInit {
   point: Point;
   fileToGetName: File;
   fileToSave: File;
+  errorOccurred: boolean;
+  uploadSuccess: boolean;
 
-  constructor(private dataImportService: DataImportService){}
+
+  constructor(private dataImportService: DataImportService){
+    this.errorOccurred = false;
+    this.uploadSuccess = false;
+  }
 
   readCsv(content) {
 
@@ -81,7 +87,16 @@ export class DataImportComponent implements OnInit {
 
 
     fileSubmit(){
-        this.dataImportService.addFile(this.fileToUpload).subscribe()
+        this.dataImportService.addFile(this.fileToUpload).subscribe(
+            r => {
+                this.uploadSuccess = true;
+                this.errorOccurred = false;
+            },
+            error => {
+                this.errorOccurred = true;
+                this.uploadSuccess = false;
+            }
+        )
     }
 
   ngOnInit() {

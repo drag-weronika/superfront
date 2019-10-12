@@ -4,6 +4,6 @@
   </div>
   <select  (change)="emitSelectedSet($event.target.value)">
     <option value="0">-----None-----</option>
-    <option *ngFor="let file of files" value={{file.fileId}}>{{file.fileName}}</option>
+    <option *ngFor="let file of files" value={{file.fileId}}>{{getName(file)}}</option>
   </select>
 </div>

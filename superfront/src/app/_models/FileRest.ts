@@ -6,4 +6,5 @@ description: string;
 categoryId: number;
 groupId: number;
 onlyY: boolean;
+ownerName: string;
 }

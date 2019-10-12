@@ -8,6 +8,10 @@
   <div class="toolbar">
   <app-saver (value3)="fileSubmit($event)"></app-saver>
 </div>
+<div class="toolbar">
+<p class="redalert" *ngIf="errorOccurred">File name already exists</p>
+<p class="greenalert" *ngIf="uploadSuccess">File uploaded successfully</p>
+</div>
 
 <div class="table">
   <br/>
