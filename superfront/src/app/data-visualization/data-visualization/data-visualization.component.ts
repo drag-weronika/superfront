@@ -24,7 +24,7 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
 
   files: FileRest[];
   selectedFile: File;
-
+  chart: any;
   fileId: number;
 
   getFilesFromSet(){
@@ -80,7 +80,19 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
   }
 
   createCustomChart(myOpts: Object) {
-    this.hcs.createChart(this.chartEl.nativeElement, myOpts);
+    this.chart = this.hcs.createChart(this.chartEl.nativeElement, myOpts);
+  }
+
+  exportAsPNG() {
+    if (this.chart) {
+        this.chart.exportChart();
+    }
+  }
+
+  exportAsPDF() {
+    if (this.chart) {
+        this.chart.exportChart({type: 'application/pdf'});
+    }
   }
 
   ngOnInit() {

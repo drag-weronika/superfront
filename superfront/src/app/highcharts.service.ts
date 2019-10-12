@@ -3,6 +3,7 @@ import * as Highcharts from 'highcharts';
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/histogram-bellcurve')(Highcharts);
+require('highcharts/modules/exporting')(Highcharts);
 
 
 @Injectable()
@@ -66,7 +67,11 @@ export class HighchartsService {
         'renderTo': e
       }
     }
-    this.charts.push(new Highcharts.Chart(opts));
+    let chart = new Highcharts.Chart(opts);
+
+    this.charts.push(chart);
+
+    return chart;
   }
 
   removeFirst() {

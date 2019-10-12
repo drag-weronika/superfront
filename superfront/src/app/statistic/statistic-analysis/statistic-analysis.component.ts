@@ -26,10 +26,15 @@ export class StatisticAnalysisComponent implements OnInit, AfterViewInit, OnDest
   fileId: number;
 
   getFilesByCategory(){
+        this.filesByCategory = [];
         this.statisticAnalysisService.getFiles().subscribe(
-        (filesByCategory : FileRest[]) => { this.filesByCategory = filesByCategory;
-        console.log(this.filesByCategory[0].fileName);}
-        )
+        (filesByCategory : FileRest[]) => {
+            for (let file of filesByCategory) {
+                if (file.onlyY) {
+                    this.filesByCategory.push(file);
+                }
+            }
+        })
   }
 
   selectedChangeHandler (event: any) {
