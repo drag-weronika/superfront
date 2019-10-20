@@ -35,12 +35,12 @@ export class PublicationsComponent implements OnInit, AfterViewInit, OnDestroy {
         let point = new Point();
         point.x = tarr[0];
         point.y = tarr[1];
-        this.publishedFile.fileContent.push(point)
+        this.publishedFile.fileContent[0].push(point)
     }
     console.log(this.publishedFile);
 
     this.myOpts.series[0].data = []
-    for (let point of this.publishedFile.fileContent) {
+    for (let point of this.publishedFile.fileContent[0]) {
         this.myOpts.series[0].data.push([+point.x, +point.y])
     }
     console.log(this.myOpts)

@@ -14,10 +14,10 @@ export class RegisterpageComponent implements OnInit {
   email: string;
   password: string;
   repeatedPassword: string;
-  registerError: boolean;
+  errorText: string[];
 
   constructor(private authService: AuthService, private router: Router) {
-    this.registerError = false;
+    this.errorText = []
   }
 
   updateEmail(email) {
@@ -43,16 +43,31 @@ export class RegisterpageComponent implements OnInit {
 
     this.authService.registerUser(user).subscribe(
         data => {
+            this.errorText = []
             this.router.navigateByUrl('/auth');
         },
         error => {
-            this.registerError = true;
+            this.errorText = []
+            if (error.error.errors != null) {
+                for (let e of error.error.errors) {
+                    switch(e.code) {
+                        case "ValidEmail": {
+                            this.errorText.push("error email text")
+                            break;
+                        }
+                        case "ValidPassword": {
+                            this.errorText.push("password must contain...")
+                            break;
+                        }
+                        case "PasswordMatches": {
+                            this.errorText.push("repeated password must match...")
+                            break;
+                        }
+                    }
+                }
+            }
         }
     );
-  }
-
-  errorOccurred() {
-    return this.registerError;
   }
 
   ngOnInit() {

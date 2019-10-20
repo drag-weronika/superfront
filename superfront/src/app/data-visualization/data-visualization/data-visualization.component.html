@@ -2,6 +2,8 @@
 <div class="mgr">
   <div class="line"><app-dropdown-file-search [files]="files" (list4)="getFilesFromSet()"(selectedSet)="selectedChangeHandler($event)"></app-dropdown-file-search></div>
   <div class="line"><div class="right">
+    <button (click)="modeError()">Show error bars</button>
+    <button (click)="modeAll()">Show all</button>
     <button (click)="exportAsPNG()">Save as PNG</button>
     <button (click)="exportAsPDF()">Save as PDF</button>
   </div></div>

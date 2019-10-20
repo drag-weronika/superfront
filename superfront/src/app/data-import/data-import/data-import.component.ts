@@ -19,20 +19,25 @@ export class DataImportComponent implements OnInit {
   fileToUpload: FileRest;
   fileToUpload1: File;
   point: Point;
-  fileToGetName: File;
   fileToSave: File;
   errorOccurred: boolean;
+  parseErrorOccurred: boolean;
   uploadSuccess: boolean;
 
 
   constructor(private dataImportService: DataImportService){
     this.errorOccurred = false;
     this.uploadSuccess = false;
+    this.parseErrorOccurred = false;
   }
 
   readCsv(content) {
 
       let allTextLines = content.split(/\r\n/);
+      if (allTextLines[0].search(/[a-zA-Z]/) >=0) {
+        allTextLines = allTextLines.slice(1)
+      }
+
       for (let i = 0; i < allTextLines.length; i++) {
           let data = allTextLines[i].split(',');
           let point = new Point();
@@ -46,9 +51,8 @@ export class DataImportComponent implements OnInit {
               point.x = tarr[0];
               point.y = tarr[1];
           }
-          this.fileToUpload1.fileContent.push(point);
+          this.fileToUpload1.fileContent[0].push(point);
       }
-      console.log(this.fileToUpload1.fileContent);
   }
 
   parseFile(file) {
@@ -56,48 +60,78 @@ export class DataImportComponent implements OnInit {
       fileReader.onload = (e) => {
           this.readCsv(fileReader.result);
       }
+
       fileReader.readAsText(file);
     }
 
    onChange(theFile){
        this.fileToUpload = new FileRest();
-       this.fileToGetName=new File();
 
-       console.log("zaladowano plik")
        this.fileToUpload1=new File();
        this.fileToUpload1.fileContent = [];
+       this.fileToUpload1.fileContent.push([])
        this.parseFile(theFile);
-        console.log("hejka");
-        this.uploadDocument(theFile);
+
+       this.uploadDocument(theFile);
    }
 
       uploadDocument(file) {
              let fileReader = new FileReader();
              fileReader.onload = (e) => {
                this.fileToUpload.content = fileReader.result as string
+
+               if (!this.validateContent(this.fileToUpload.content)) {
+                    this.parseErrorOccurred = true;
+                    this.fileToUpload.content = null;
+                    this.fileToUpload1 = null;
+               } else {
+                    this.parseErrorOccurred = false;
+               }
                this.fileToUpload.ownerName = sessionStorage.getItem('username');
-               console.log("XXXXXXXXXXXX"+this.fileToUpload.content);
              }
              fileReader.readAsText(file);
          }
 
    setName(name: string){
-      console.log("ustawiam nazwe " + name);
       this.fileToUpload.fileName=name ;
    }
 
 
     fileSubmit(){
-        this.dataImportService.addFile(this.fileToUpload).subscribe(
-            r => {
-                this.uploadSuccess = true;
-                this.errorOccurred = false;
-            },
-            error => {
-                this.errorOccurred = true;
-                this.uploadSuccess = false;
+        if (this.fileToUpload.content != null) {
+            this.dataImportService.addFile(this.fileToUpload).subscribe(
+                r => {
+                    this.uploadSuccess = true;
+                    this.errorOccurred = false;
+                },
+                error => {
+                    this.errorOccurred = true;
+                    this.uploadSuccess = false;
+                }
+            )
+        }
+    }
+
+    validateContent(content: string) {
+      let allTextLines = content.split(/\r\n/);
+
+      if (allTextLines[0].search(/[a-zA-Z]/) >=0) {
+        allTextLines = allTextLines.slice(1)
+      }
+
+      let numberOfColumns = allTextLines[0].split(',').length
+
+      for (let i = 0; i < allTextLines.length; i++) {
+        if (allTextLines[i].split(',').length != numberOfColumns) {
+            return false
+        }
+        for(let value of allTextLines[i].split(',')) {
+            if (Number.isNaN(+value)) {
+                return false
             }
-        )
+        }
+      }
+      return true;
     }
 
   ngOnInit() {

@@ -39,6 +39,7 @@ export class BasicVisualizationComponent implements OnInit, AfterViewInit, OnDes
   onChange(file:any){
     this.uploadedFile = new File();
     this.uploadedFile.fileContent = [];
+    this.uploadedFile.fileContent.push([])
     this.parseFile(file)
   }
 
@@ -60,12 +61,12 @@ export class BasicVisualizationComponent implements OnInit, AfterViewInit, OnDes
         let point = new Point();
         point.x = tarr[0];
         point.y = tarr[1];
-        this.uploadedFile.fileContent.push(point)
+        this.uploadedFile.fileContent[0].push(point)
     }
     console.log(this.uploadedFile);
 
     this.myOpts.series[0].data = []
-    for (let point of this.uploadedFile.fileContent) {
+    for (let point of this.uploadedFile.fileContent[0]) {
         this.myOpts.series[0].data.push([+point.x, +point.y])
     }
     console.log(this.myOpts)

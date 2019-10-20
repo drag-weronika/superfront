@@ -3,13 +3,14 @@
   <app-uploader (value1)="onChange($event)"></app-uploader>
 </div>
 <div class="toolbar">
-  <app-name-setter *ngIf="fileToGetName" (value2)="setName($event)"></app-name-setter>
+  <app-name-setter *ngIf="fileToUpload && fileToUpload.content" (value2)="setName($event)"></app-name-setter>
 </div>
   <div class="toolbar">
   <app-saver (value3)="fileSubmit($event)"></app-saver>
 </div>
 <div class="toolbar">
 <p class="redalert" *ngIf="errorOccurred">File name already exists</p>
+  <p class="redalert" *ngIf="parseErrorOccurred">File has incompatible type</p>
 <p class="greenalert" *ngIf="uploadSuccess">File uploaded successfully</p>
 </div>
 

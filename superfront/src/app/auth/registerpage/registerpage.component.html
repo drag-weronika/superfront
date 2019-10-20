@@ -15,5 +15,7 @@
 </form>
 
   <button type="submit" (click)="registerUser()" class="registerbtn">Register</button>
-  <p class="redalert" *ngIf="errorOccurred()">Registration error</p>
+  <tr  class="redalert" *ngFor="let text of errorText">
+    <td>{{text}}</td>
+  </tr>
 </div>
