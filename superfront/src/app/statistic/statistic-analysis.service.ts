@@ -19,8 +19,8 @@ export class StatisticAnalysisService {
       ));
     }
 
-    getStatisticalData(id:number) {
-        return this.http.get(this.baseUrl+'/statistical/' + id);
+    getStatisticalData(id:number, column: number) {
+        return this.http.get(this.baseUrl+'/statistical/' + id + "?column=" + column);
     }
 
 

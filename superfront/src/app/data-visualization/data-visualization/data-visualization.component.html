@@ -1,18 +1,37 @@
 
 <div class="mgr">
-  <div class="line"><app-dropdown-file-search [files]="files" (list4)="getFilesFromSet()"(selectedSet)="selectedChangeHandler($event)"></app-dropdown-file-search></div>
+  <div class="line"><app-dropdown-file-search [files]="files" (selectedSet)="selectedChangeHandler($event)"></app-dropdown-file-search></div>
   <div class="line"><div class="right">
+    <button (click)="changeView()">Change view</button>
+    <button (click)="modeSingle()">Show single</button>
     <button (click)="modeError()">Show error bars</button>
     <button (click)="modeAll()">Show all</button>
+    <button (click)="modeRegression()">Show regression</button>
     <button (click)="exportAsPNG()">Save as PNG</button>
     <button (click)="exportAsPDF()">Save as PDF</button>
   </div></div>
   <br />
   <br />
   <br />
-<div class="mgr">
-  <div #charts id="test"></div>
+<div class="mgr" *ngIf="viewMode=='chart'">
+  <div #charts id="test" ></div>
+  <p>{{slope}} {{intercept}}</p>
 </div>
 
+  <table bgcolor="#FFFFFF"  *ngIf="viewMode=='table'" style="width:80%">
+    <thead>
+    <tr>
+      <th *ngFor="let x of [].constructor(numberOfColumnsInTable)">ccc</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr  *ngFor="let point_data of chart.series[0].data">
+      <td>{{point_data.x}}</td>
+      <td>{{point_data.y}}</td>
+      <td *ngFor="let x of range(numberOfColumnsInTable-2)">{{chart.series[x+1].data[chart.series[0].data.indexOf(point_data)].y}}</td>
+
+    </tr>
+    </tbody>
+  </table>
   <app-description [selectedFile]="selectedFile"></app-description>
 </div>

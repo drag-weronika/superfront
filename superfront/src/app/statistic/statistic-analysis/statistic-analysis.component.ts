@@ -23,25 +23,46 @@ export class StatisticAnalysisComponent implements OnInit, AfterViewInit, OnDest
 
   filesByCategory: FileRest[];
   selectedFile: File;
-
+  columnId: any;
   fileId: number;
+  chart1: any;
+  chart2: any;
 
   getFilesByCategory(){
         this.filesByCategory = [];
         this.statisticAnalysisService.getFiles().subscribe(
         (filesByCategory : FileRest[]) => {
             for (let file of filesByCategory) {
-                if (file.onlyY) {
-                    this.filesByCategory.push(file);
-                }
+                this.filesByCategory.push(file);
             }
         })
   }
 
   selectedChangeHandler (event: any) {
-    console.log("##" + event)
-    this.statisticAnalysisService.getStatisticalData(event).subscribe(
+    this.fileId = event
+  }
+
+    createCustomChart(myOpts: any) {
+      if (this.chart1 == null) {
+        this.chart1 = this.hcs.createChart(this.chartEl.nativeElement, myOpts);
+      } else {
+        this.chart1.series[0].update(myOpts.series[0])
+      }
+      console.log(this.chart1.series)
+    }
+
+    createCustomChart2(myOpts: any) {
+      if (this.chart2 == null) {
+        this.chart2 = this.hcs.createChart(this.chartEl2.nativeElement, myOpts);
+      } else {
+        this.chart2.series[1].update(myOpts.series[1])
+      }
+    }
+
+  submit() {
+     this.statisticAnalysisService.getStatisticalData(this.fileId, this.columnId).subscribe(
         (data: StatisticalData) => {
+            this.myOpts.series[0].data[0] = []
             this.myOpts.series[0].data[0].push(data.min)
             this.myOpts.series[0].data[0].push(data.q1)
             this.myOpts.series[0].data[0].push(data.median)
@@ -56,16 +77,8 @@ export class StatisticAnalysisComponent implements OnInit, AfterViewInit, OnDest
     )
   }
 
-    createCustomChart(myOpts: Object) {
-      this.hcs.createChart(this.chartEl.nativeElement, myOpts);
-    }
-
-    createCustomChart2(myOpts: Object) {
-          this.hcs.createChart(this.chartEl2.nativeElement, myOpts);
-        }
-
-
   ngOnInit() {
+  this.columnId = 1;
   this.getFilesByCategory()
   }
       public ngAfterViewInit(){

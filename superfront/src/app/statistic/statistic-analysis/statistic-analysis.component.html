@@ -1,5 +1,7 @@
 <div class="mgr">
   <div class="line"><app-dropdown-file-by-category [filesByCategory]="filesByCategory" (list5)="getFilesByCategory()"(selectedByCategory)="selectedChangeHandler($event)"></app-dropdown-file-by-category></div>
+  <input type="number" [(ngModel)]="columnId" name="inputName">
+  <button (click)="submit()">Submit</button>
   <br />
   <br />
   <div class="mgr">

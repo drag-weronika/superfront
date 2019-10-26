@@ -11,10 +11,9 @@ export class DropdownFileSearchComponent implements OnInit {
   constructor() { }
   @Input() files: FileRest[];
   @Output() selectedSet=new EventEmitter<any>();
-  @Output() list4=new EventEmitter<any>();
+
 
   emitSelectedSet(val: any){
-      console.log("emit" + val)
       this.selectedSet.emit(val);
   }
 

@@ -9,6 +9,7 @@ const routes: Routes = [
       { path: 'data-manipulation', loadChildren: () => import('./data-manipulation/data-manipulation.module').then(mod => mod.DataManipulationModule)},
       { path: 'data-visualization', loadChildren: () => import('./data-visualization/data-visualization.module').then(mod => mod.DataVisualizationModule)},
       { path: 'publications', loadChildren: () => import('./publications/publications.module').then(mod => mod.PublicationsModule)},
+      { path: 'covariance', loadChildren: () => import('./covariance/covariance.module').then(mod => mod.CovarianceModule)},
       { path: 'statistic', loadChildren: () => import('./statistic/statistic.module').then(mod => mod.StatisticModule)},
 
 

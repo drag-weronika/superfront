@@ -2,9 +2,13 @@ import { Component, ElementRef, OnInit, ChangeDetectorRef, OnDestroy, ViewChild,
 import { DataVisualizationService }from 'src/app/data-visualization/data-visualization.service';
 import { FileRest } from 'src/app/_models/fileRest';
 import { File } from 'src/app/_models/file';
+import { LinearRegression } from 'src/app/_models/LinearRegression';
 import { Point } from 'src/app/_models/point';
 import { HighchartsService } from 'src/app/highcharts.service';
 
+enum Mode {
+    ALL, SINGLE, ERROR_BARS
+}
 
 @Component({
   selector: 'app-data-visualization',
@@ -12,7 +16,7 @@ import { HighchartsService } from 'src/app/highcharts.service';
   styleUrls: ['./data-visualization.component.css']
 })
 export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDestroy {
-    @ViewChild('charts', {static: false}) public chartEl: ElementRef;
+    @ViewChild('charts', {static: false}) chartEl: ElementRef
   myOpts = {
       exporting: { enabled: false },
       plotOptions: {
@@ -33,6 +37,12 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
   chart: any;
   fileId: number;
   maxNumberOfSeries: number
+  slope: number
+  intercept: number
+  viewMode: string
+  dataMode: Mode
+  numberOfColumns: number
+  numberOfColumnsInTable: number
 
   getFilesFromSet(){
       this.dataVisualizationService.getFiles().subscribe(
@@ -41,19 +51,39 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
       })
   }
 
+  range(n: number) {
+    let arr = []
+    for(let i=0;i<n;i++){
+        arr.push(i)
+    }
+    return arr
+  }
+
   selectedChangeHandler (event: number) {
     if (this.selectedFile != null) {
         for(let i=0;i< this.selectedFile.fileContent.length;i++) {
             this.chart.series[i].update(this.drawEmptyChart())
         }
+        this.chart.series[1].update(this.drawEmptyChart())
     }
 
+    let linearRegression = new LinearRegression()
+    linearRegression.firstColumnId = 1
+    linearRegression.secondColumnId = 2
+    linearRegression.fileId = event
+
+    this.dataVisualizationService.regression(linearRegression).subscribe(
+        r => {
+            this.slope = (r as LinearRegression).slope
+            this.intercept = (r as LinearRegression).intercept
+        }
+    )
 
     let fileRest = this.files.filter((item) => item.fileId == event)[0];
-    console.log("files " + fileRest)
+
     this.selectedFile = new File()
     this.selectedFile.fileContent = []
-    console.log(event)
+
     this.selectedFile.fileId = fileRest.fileId;
 
     this.readCsv(fileRest.content)
@@ -63,17 +93,14 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
     let allTextLines = content.split(/\r\n|\n/);
     let xFlag = true;
 
-    let numberOfColumns = allTextLines[0].split(',').length
-    for (let i=0;i<numberOfColumns-1;i++) {
+    this.numberOfColumns = allTextLines[0].split(',').length
+    for (let i=0;i<this.numberOfColumns-1;i++) {
         this.selectedFile.fileContent.push(new Array<Point>())
     }
 
     if (this.selectedFile.fileContent.length == 0) {
         this.selectedFile.fileContent.push(new Array<Point>())
     }
-
-    console.log("number of columns " + numberOfColumns)
-    console.log("file content size " + this.selectedFile.fileContent.length)
 
     for (let i = 0; i < allTextLines.length; i++) {
         let data = allTextLines[i].split(',');
@@ -85,21 +112,18 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
             point.y = data[0];
             this.selectedFile.fileContent[0].push(point)
         } else {
-            for (let j=1;j<numberOfColumns;j++) {
+            for (let j=1;j<this.numberOfColumns;j++) {
                 let point = new Point();
                 let tarr = [];
                 tarr.push(data[0]);
                 tarr.push(data[j]);
                 point.x = tarr[0];
                 point.y = tarr[1];
-                console.log(point)
-                console.log(j-1)
                 this.selectedFile.fileContent[j-1].push(point)
             }
         }
 
     }
-    console.log(this.selectedFile);
 
     this.myOpts.series = []
     let pointStart = Math.round(this.selectedFile.fileContent[0][0].x)
@@ -121,17 +145,60 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
     }
 
     this.chart.series[0].update(this.drawChartFromSelectedFile(0))
-
-    console.log(this.myOpts)
-
+    this.dataMode = Mode.SINGLE
+    this.numberOfColumnsInTable = 2
   }
 
-  modeError() {
+  modeSingle() {
+    this.numberOfColumnsInTable = 2
+    this.dataMode = Mode.SINGLE
     if (this.selectedFile.fileContent == null) {
         return
     }
     this.chart.series[0].update(this.drawChartFromSelectedFile(0))
-    this.chart.series[1].update(this.drawErrorBars())
+
+    let numberOfSeries = this.selectedFile.fileContent.length
+    for(let i=1;i< numberOfSeries;i++) {
+        this.chart.series[i].update(this.drawEmptyChart())
+    }
+    if (this.chart.series[1]) {
+        this.chart.series[1].update(this.drawEmptyChart())
+    }
+  }
+
+  modeError() {
+    if (this.viewMode == 'table') {
+        this.modeAll()
+    }
+    if (this.numberOfColumns < 3) {
+        this.numberOfColumnsInTable = 2
+    } else {
+        this.numberOfColumnsInTable = 3
+    }
+
+    this.dataMode = Mode.ERROR_BARS
+    if (this.viewMode == 'chart') {
+        if (this.selectedFile.fileContent == null) {
+            return
+        }
+        this.chart.series[0].update(this.drawChartFromSelectedFile(0))
+        this.chart.series[1].update(this.drawErrorBars())
+
+        let numberOfSeries = this.selectedFile.fileContent.length
+        for(let i=2;i< numberOfSeries;i++) {
+            this.chart.series[i].update(this.drawEmptyChart())
+        }
+    }
+  }
+
+  modeRegression() {
+    this.numberOfColumnsInTable = 2
+    this.dataMode = Mode.SINGLE
+    if (this.selectedFile.fileContent == null) {
+        return
+    }
+    this.chart.series[0].update(this.drawChartFromSelectedFile(0))
+    this.chart.series[1].update(this.drawLinearRegression())
 
     let numberOfSeries = this.selectedFile.fileContent.length
     for(let i=2;i< numberOfSeries;i++) {
@@ -140,6 +207,8 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
   }
 
   modeAll() {
+    this.numberOfColumnsInTable = Math.max(this.numberOfColumns, 2)
+    this.dataMode = Mode.ALL
     if (this.selectedFile.fileContent == null) {
         return
     }
@@ -168,11 +237,45 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
 
   ngOnInit() {
     this.getFilesFromSet();
+    this.viewMode = 'chart'
   }
   public ngAfterViewInit() {
   }
 
   public ngOnDestroy() {
+  }
+
+  changeView() {
+    if (this.viewMode == 'chart') {
+        this.viewMode = 'table'
+        if (this.dataMode == Mode.ERROR_BARS) {
+            this.modeAll()
+            this.dataMode = Mode.ERROR_BARS
+            if (this.numberOfColumns < 3) {
+                this.numberOfColumnsInTable = 2
+            } else {
+                this.numberOfColumnsInTable = 3
+            }
+        }
+    } else {
+        this.viewMode = 'chart'
+        this.changeDetectionRef.detectChanges();
+        if (this.myOpts.series.length == 0) {
+            for (let i=0;i<this.maxNumberOfSeries;i++) {
+                this.myOpts.series.push({visible: false,
+                                         showInLegend: false})
+            }
+        }
+
+        this.createCustomChart(this.myOpts)
+        if (this.dataMode == Mode.ALL) {
+            this.modeAll()
+        } else if (this.dataMode == Mode.SINGLE) {
+            this.modeSingle()
+        } else if (this.dataMode == Mode.ERROR_BARS) {
+            this.modeError()
+        }
+    }
   }
 
   drawChartFromSelectedFile(id: number) {
@@ -185,7 +288,7 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
                                         pointStart: pointStart,
                                         visible: true,
                                         name: id,
-                                        type: 'pie',
+                                        type: 'line',
                                         data: newData
                                     }
       for (let point of this.selectedFile.fileContent[id]) {
@@ -195,6 +298,41 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
               newData.push([+point.y])
           }
       }
+      return series
+  }
+
+  drawLinearRegression() {
+      let pointStart = Math.round(this.selectedFile.fileContent[0][0].x)
+      if (Number.isNaN(pointStart)) {
+        pointStart = 0
+      }
+      let newData = []
+      let series = {
+                                        pointStart: pointStart,
+                                        visible: true,
+                                        name: 'regression',
+                                        type: 'line',
+                                        data: newData
+                                    }
+
+      let point = new Point()
+      point.x = this.selectedFile.fileContent[0][0].x
+      if (point.x == null) {
+        point.x = pointStart
+      }
+      point.y = this.slope*point.x + this.intercept
+      newData.push([+point.x, +point.y])
+
+      let numberOfPoints = this.selectedFile.fileContent[0].length
+      point = new Point()
+      point.x = this.selectedFile.fileContent[0][numberOfPoints-1].x
+      if (point.x == null) {
+        point.x = numberOfPoints-1
+      }
+      point.y = this.slope*point.x + this.intercept
+      newData.push([+point.x, +point.y])
+
+
       return series
   }
 

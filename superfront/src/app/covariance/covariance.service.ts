@@ -7,8 +7,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class DataVisualizationService {
-
+export class CovarianceService {
   baseUrl:string="http://localhost:8080/api";
   constructor(private http:HttpClient) { }
 
@@ -18,25 +17,12 @@ export class DataVisualizationService {
     ));
   }
 
-  updateFile(fileRest){
+  compute(computationPacket){
       let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       let options = {
             headers: headers
          };
-      console.log(JSON.stringify(fileRest))
-    return this.http.put(this.baseUrl+'/files', JSON.stringify(fileRest),options);
-  }
-
-  getSet(id:number){
-    return this.http.get(this.baseUrl+'/set/${id}');
-  }
-
-  regression(linearRegression){
-      let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-      let options = {
-            headers: headers
-         };
-   console.log(JSON.stringify(linearRegression))
-    return this.http.post(this.baseUrl+'/statistical/regression', JSON.stringify(linearRegression),options);
+   console.log(JSON.stringify(computationPacket))
+    return this.http.post(this.baseUrl+'/statistical/computation', JSON.stringify(computationPacket),options);
   }
 }
