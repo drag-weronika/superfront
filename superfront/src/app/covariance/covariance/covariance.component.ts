@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FileRest } from 'src/app/_models/fileRest';
+import { FileRest } from 'src/app/_models/FileRest';
 import { ComputationPacket } from 'src/app/_models/ComputationPacket';
 import { CovarianceService }from 'src/app/covariance/covariance.service';
 
 @Component({
   selector: 'app-covariance',
   templateUrl: './covariance.component.html',
+
   styleUrls: ['./covariance.component.css']
 })
 export class CovarianceComponent implements OnInit {

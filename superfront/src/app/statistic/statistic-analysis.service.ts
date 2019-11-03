@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable }  from 'rxjs';
 import { HttpClient, HttpHeaders, HttpResponse, HttpRequest } from '@angular/common/http';
-import { FileRest } from 'src/app/_models/fileRest';
+import { FileRest } from 'src/app/_models/FileRest';
 import { map } from 'rxjs/operators';
 import { StatisticalData } from 'src/app/_models/StatisticalData';
 

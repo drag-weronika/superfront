@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, AfterViewInit, OnDestroy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { HighchartsService } from 'src/app/highcharts.service';
 import { PublicationsService }from 'src/app/publications/publications.service';
-import { FileRest } from 'src/app/_models/fileRest';
+import { FileRest } from 'src/app/_models/FileRest';
 import { File } from 'src/app/_models/file';
 import { Point } from 'src/app/_models/point';
 import * as Highcharts from 'highcharts';

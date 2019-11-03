@@ -15,13 +15,13 @@
   <br />
 <div class="mgr" *ngIf="viewMode=='chart'">
   <div #charts id="test" ></div>
-  <p>{{slope}} {{intercept}}</p>
+  <p *ngIf="regression">y = {{slope}} * x + {{intercept}}</p>
 </div>
 
   <table bgcolor="#FFFFFF"  *ngIf="viewMode=='table'" style="width:80%">
     <thead>
     <tr>
-      <th *ngFor="let x of [].constructor(numberOfColumnsInTable)">ccc</th>
+      <th *ngFor="let x of [].constructor(numberOfColumnsInTable)"></th>
     </tr>
     </thead>
     <tbody>
@@ -29,7 +29,6 @@
       <td>{{point_data.x}}</td>
       <td>{{point_data.y}}</td>
       <td *ngFor="let x of range(numberOfColumnsInTable-2)">{{chart.series[x+1].data[chart.series[0].data.indexOf(point_data)].y}}</td>
-
     </tr>
     </tbody>
   </table>

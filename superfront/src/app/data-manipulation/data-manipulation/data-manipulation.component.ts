@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http'
 
 import {DataManipulationService} from 'src/app/data-manipulation/data-manipulation.service';
 import { File } from 'src/app/_models/file';
-import { FileRest } from 'src/app/_models/fileRest';
+import { FileRest } from 'src/app/_models/FileRest';
 import { Category } from 'src/app/_models/category';
 import { Group } from 'src/app/_models/group';
 import { UserRest } from 'src/app/_models/userRest';
@@ -29,8 +29,13 @@ export class DataManipulationComponent implements OnInit {
   users: UserRest[];
   userSelectsString = '';
 
-  constructor(public dataManipulationService: DataManipulationService ) {
+  created: boolean;
+  notCreated: boolean;
 
+
+  constructor(public dataManipulationService: DataManipulationService ) {
+        //this.created=false;
+        //this.notCreated=false;
   }
 
   getFiles(){
@@ -64,7 +69,16 @@ export class DataManipulationComponent implements OnInit {
     fileRest.fileId = this.selectedFileId;
     fileRest.groupId = this.selectedGroupId;
     fileRest.categoryId = this.selectedCategoryId;
-    this.dataManipulationService.updateFile(fileRest).subscribe((event)=>{});
+    this.dataManipulationService.updateFile(fileRest).subscribe(
+    (event)=>{
+    //this.created=true;
+    //this.notCreated=false;
+    }
+   //error=>{
+   //this.created=false;
+   //this.notCreated=true;
+   //}
+    );
   }
 
 
@@ -78,8 +92,13 @@ export class DataManipulationComponent implements OnInit {
         category.categoryName = this.bodyText;
         this.dataManipulationService.addCategory(category).subscribe(
                                                                       (event)=>{}
-                                                                      );
+                                                                     );
     }
+
+     closeMod(id: string) {
+            this.dataManipulationService.close(id);
+     }
+
   bodyText: string;
 
   ngOnInit() {

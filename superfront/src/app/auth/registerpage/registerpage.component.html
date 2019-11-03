@@ -13,8 +13,11 @@
     <hr>
   </div>
 </form>
+  <br/>
 
   <button type="submit" (click)="registerUser()" class="registerbtn">Register</button>
+  <br/>
+  <p class="redalert" *ngIf="doubledLogin">User with this email already exists</p>
   <tr  class="redalert" *ngFor="let text of errorText">
     <td>{{text}}</td>
   </tr>

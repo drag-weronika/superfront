@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ChangeDetectorRef, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { DataVisualizationService }from 'src/app/data-visualization/data-visualization.service';
-import { FileRest } from 'src/app/_models/fileRest';
+import { FileRest } from 'src/app/_models/FileRest';
 import { File } from 'src/app/_models/file';
 import { LinearRegression } from 'src/app/_models/LinearRegression';
 import { Point } from 'src/app/_models/point';
@@ -30,8 +30,10 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
   constructor(private hcs: HighchartsService, private changeDetectionRef: ChangeDetectorRef
                ,private dataVisualizationService:DataVisualizationService) {
     this.maxNumberOfSeries = 100;
+    this.regression = false;
   }
 
+  regression: boolean;
   files: FileRest[];
   selectedFile: File;
   chart: any;
@@ -45,6 +47,7 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
   numberOfColumnsInTable: number
 
   getFilesFromSet(){
+      this.regression = false;
       this.dataVisualizationService.getFiles().subscribe(
       (files : FileRest[]) => { this.files = files;
       console.log(this.files);
@@ -60,6 +63,7 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
   }
 
   selectedChangeHandler (event: number) {
+  this.regression = false;
     if (this.selectedFile != null) {
         for(let i=0;i< this.selectedFile.fileContent.length;i++) {
             this.chart.series[i].update(this.drawEmptyChart())
@@ -150,6 +154,7 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
   }
 
   modeSingle() {
+  this.regression = false;
     this.numberOfColumnsInTable = 2
     this.dataMode = Mode.SINGLE
     if (this.selectedFile.fileContent == null) {
@@ -167,6 +172,7 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
   }
 
   modeError() {
+  this.regression = false;
     if (this.viewMode == 'table') {
         this.modeAll()
     }
@@ -192,6 +198,7 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
   }
 
   modeRegression() {
+    this.regression = true;
     this.numberOfColumnsInTable = 2
     this.dataMode = Mode.SINGLE
     if (this.selectedFile.fileContent == null) {
@@ -207,6 +214,7 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
   }
 
   modeAll() {
+  this.regression = false;
     this.numberOfColumnsInTable = Math.max(this.numberOfColumns, 2)
     this.dataMode = Mode.ALL
     if (this.selectedFile.fileContent == null) {

@@ -6,7 +6,7 @@ import { Group } from 'src/app/_models/group';
 import { UserRest } from 'src/app/_models/userRest';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FileRest } from 'src/app/_models/fileRest';
+import { FileRest } from 'src/app/_models/FileRest';
 
 
 @Injectable({

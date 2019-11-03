@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { Point } from 'src/app/_models/point';
 import { HttpClient, HttpHeaders, HttpResponse, HttpRequest,HttpEventType } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { FileRest } from 'src/app/_models/fileRest';
+import { FileRest } from 'src/app/_models/FileRest';
 import { File } from 'src/app/_models/file';
 
 import { DataImportService } from 'src/app/data-import/data-import.service';
@@ -65,6 +65,10 @@ export class DataImportComponent implements OnInit {
     }
 
    onChange(theFile){
+       this.errorOccurred = false;
+       this.uploadSuccess = false;
+       this.parseErrorOccurred = false;
+
        this.fileToUpload = new FileRest();
 
        this.fileToUpload1=new File();

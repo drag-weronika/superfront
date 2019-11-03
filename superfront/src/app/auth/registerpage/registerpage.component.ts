@@ -15,9 +15,11 @@ export class RegisterpageComponent implements OnInit {
   password: string;
   repeatedPassword: string;
   errorText: string[];
+  doubledLogin: boolean;
 
   constructor(private authService: AuthService, private router: Router) {
     this.errorText = []
+
   }
 
   updateEmail(email) {
@@ -52,15 +54,15 @@ export class RegisterpageComponent implements OnInit {
                 for (let e of error.error.errors) {
                     switch(e.code) {
                         case "ValidEmail": {
-                            this.errorText.push("error email text")
+                            this.errorText.push("*Provided email has invalid format")
                             break;
                         }
                         case "ValidPassword": {
-                            this.errorText.push("password must contain...")
+                            this.errorText.push("*Password must contain at least 8 characters including small and big letters, a number and  a special character.")
                             break;
                         }
                         case "PasswordMatches": {
-                            this.errorText.push("repeated password must match...")
+                            this.errorText.push("*Repeated password must match the one above!")
                             break;
                         }
                     }

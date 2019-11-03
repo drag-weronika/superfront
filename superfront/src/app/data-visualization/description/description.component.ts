@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { File } from 'src/app/_models/file';
-import { FileRest } from 'src/app/_models/fileRest';
+import { FileRest } from 'src/app/_models/FileRest';
 import { DataVisualizationService }from 'src/app/data-visualization/data-visualization.service';
 import {Router} from '@angular/router';
 
