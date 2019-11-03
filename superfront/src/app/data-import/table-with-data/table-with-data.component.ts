@@ -2,7 +2,6 @@ import { Component, OnInit, Input} from '@angular/core';
 import { Point } from 'src/app/_models/point';
 import { File } from 'src/app/_models/file';
 
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-table-with-data',
@@ -17,5 +16,13 @@ export class TableWithDataComponent implements OnInit {
 
   ngOnInit() {
   }
+
+    range(n: number) {
+      let arr = []
+      for(let i=0;i<n;i++){
+          arr.push(i)
+      }
+      return arr
+    }
 
 }

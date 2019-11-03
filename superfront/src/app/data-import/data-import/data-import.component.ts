@@ -37,6 +37,10 @@ export class DataImportComponent implements OnInit {
       if (allTextLines[0].search(/[a-zA-Z]/) >=0) {
         allTextLines = allTextLines.slice(1)
       }
+      let numberOfColumns = allTextLines[0].split(',').length
+      for (let i=0;i<numberOfColumns;i++) {
+          this.fileToUpload1.fileContent.push([])
+      }
 
       for (let i = 0; i < allTextLines.length; i++) {
           let data = allTextLines[i].split(',');
@@ -52,6 +56,12 @@ export class DataImportComponent implements OnInit {
               point.y = tarr[1];
           }
           this.fileToUpload1.fileContent[0].push(point);
+          for(let j = 2; j < data.length; j++) {
+              point = new Point()
+              point.x = data[0]
+              point.y = data[j]
+              this.fileToUpload1.fileContent[j-1].push(point);
+          }
       }
   }
 
@@ -73,7 +83,7 @@ export class DataImportComponent implements OnInit {
 
        this.fileToUpload1=new File();
        this.fileToUpload1.fileContent = [];
-       this.fileToUpload1.fileContent.push([])
+
        this.parseFile(theFile);
 
        this.uploadDocument(theFile);
