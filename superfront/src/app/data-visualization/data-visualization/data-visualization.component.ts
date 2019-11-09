@@ -66,8 +66,8 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
 
   setTitles() {
     console.log(this.chart)
-    this.chart.xAxis[0].axisTitle.attr({text: this.xAxisTitle})
-    this.chart.yAxis[0].axisTitle.attr({text: this.yAxisTitle})
+    this.chart.xAxis[0].update({title:{text: this.xAxisTitle}})
+    this.chart.yAxis[0].update({title:{text: this.yAxisTitle}})
     this.chart.title.update({text: this.chartTitle})
     this.svgContent = this.chart.getSVG()
   }
