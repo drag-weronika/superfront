@@ -31,11 +31,12 @@ export class DataManipulationComponent implements OnInit {
 
   created: boolean;
   notCreated: boolean;
+  categoryErrorOccurred: boolean = false
 
 
   constructor(public dataManipulationService: DataManipulationService ) {
-        //this.created=false;
-        //this.notCreated=false;
+        this.created=false;
+        this.notCreated=false;
   }
 
   getFiles(){
@@ -65,34 +66,45 @@ export class DataManipulationComponent implements OnInit {
   }
 
   setSubmit(){
+    this.created=false;
+    this.notCreated=false;
     let fileRest = new FileRest();
     fileRest.fileId = this.selectedFileId;
     fileRest.groupId = this.selectedGroupId;
     fileRest.categoryId = this.selectedCategoryId;
-    this.dataManipulationService.updateFile(fileRest).subscribe(
-    (event)=>{
-    //this.created=true;
-    //this.notCreated=false;
+
+    if (this.selectedFileId && this.selectedFileId != 0 &&
+            (this.selectedCategoryId && this.selectedCategoryId != 0 ||
+                this.selectedGroupId && this.selectedGroupId != 0)) {
+        console.log(this.selectedFileId + " " + this.selectedCategoryId + " " + this.selectedGroupId)
+        this.dataManipulationService.updateFile(fileRest).subscribe(
+        (event)=>{
+            this.created=true;
+        }
+        );
+    } else {
+        this.notCreated = true;
     }
-   //error=>{
-   //this.created=false;
-   //this.notCreated=true;
-   //}
-    );
   }
 
 
     openModal(id: string) {
+        this.categoryErrorOccurred = false
         this.dataManipulationService.open(id);
     }
 
     closeModal(id: string) {
-        this.dataManipulationService.close(id);
         let category = new Category();
         category.categoryName = this.bodyText;
         this.dataManipulationService.addCategory(category).subscribe(
-                                                                      (event)=>{}
-                                                                     );
+         data=>{
+            this.getCategories();
+            this.dataManipulationService.close(id);
+         },
+         error=> {
+            this.categoryErrorOccurred = true
+         }
+        );
     }
 
      closeMod(id: string) {

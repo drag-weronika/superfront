@@ -18,15 +18,23 @@ export class StatisticAnalysisComponent implements OnInit, AfterViewInit, OnDest
   @ViewChild('charts', {static: false}) public chartEl: ElementRef;
   @ViewChild('charts2', {static: false}) public chartEl2: ElementRef;
 
-  constructor(private hcs: HighchartsService, private changeDetectionRef: ChangeDetectorRef
-                             ,private statisticAnalysisService:StatisticAnalysisService) { }
-
   filesByCategory: FileRest[];
   selectedFile: File;
   columnId: any;
   fileId: number;
+  binNumberChoice: string;
   chart1: any;
   chart2: any;
+  binsNumberVar: any
+  binNumber: number
+
+  constructor(private hcs: HighchartsService, private changeDetectionRef: ChangeDetectorRef
+                             ,private statisticAnalysisService:StatisticAnalysisService) {
+    this.binNumberChoice = 'square-root';
+    this.binsNumberVar = 'square-root'
+    this.binNumber = 2
+  }
+
 
   getFilesByCategory(){
         this.filesByCategory = [];
@@ -36,6 +44,10 @@ export class StatisticAnalysisComponent implements OnInit, AfterViewInit, OnDest
                 this.filesByCategory.push(file);
             }
         })
+  }
+
+  selectedBinNumberChangeHandler(event: any) {
+    this.binNumberChoice = event
   }
 
   selectedChangeHandler (event: any) {
@@ -56,6 +68,7 @@ export class StatisticAnalysisComponent implements OnInit, AfterViewInit, OnDest
         this.chart2 = this.hcs.createChart(this.chartEl2.nativeElement, myOpts);
       } else {
         this.chart2.series[1].update(myOpts.series[1])
+        this.chart2.series[0].update(myOpts.series[0])
       }
     }
 
@@ -72,6 +85,25 @@ export class StatisticAnalysisComponent implements OnInit, AfterViewInit, OnDest
             this.createCustomChart(this.myOpts)
 
             this.histogramOpts.series[1].data = data.data;
+            console.log('set to ' + this.binNumberChoice)
+
+            if (this.binNumberChoice === 'custom') {
+                this.binsNumberVar = this.binNumber
+            } else {
+                this.binsNumberVar = this.binNumberChoice
+            }
+
+            this.histogramOpts.series[0] = {
+                                                                       name: 'Histogram',
+                                                                       type: 'histogram',
+                                                                       binsNumber: this.binsNumberVar,
+                                                                       xAxis: 1,
+                                                                       yAxis: 1,
+                                                                       baseSeries: 's1',
+                                                                       zIndex: -1
+                                                                   }
+
+            console.log(this.histogramOpts)
             this.createCustomChart2(this.histogramOpts)
         }
     )
@@ -108,6 +140,8 @@ export class StatisticAnalysisComponent implements OnInit, AfterViewInit, OnDest
         }]
     }
 
+
+
     histogramOpts = {
                         title: {
                             text: 'Highcharts Histogram'
@@ -131,6 +165,7 @@ export class StatisticAnalysisComponent implements OnInit, AfterViewInit, OnDest
                         series: [{
                             name: 'Histogram',
                             type: 'histogram',
+                            binsNumber: this.binsNumberVar,
                             xAxis: 1,
                             yAxis: 1,
                             baseSeries: 's1',

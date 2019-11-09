@@ -4,6 +4,7 @@ import { FileRest } from 'src/app/_models/FileRest';
 import { File } from 'src/app/_models/file';
 import { LinearRegression } from 'src/app/_models/LinearRegression';
 import { Point } from 'src/app/_models/point';
+import { SvgImage } from 'src/app/_models/SvgImage';
 import { HighchartsService } from 'src/app/highcharts.service';
 
 enum Mode {
@@ -17,7 +18,18 @@ enum Mode {
 })
 export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild('charts', {static: false}) chartEl: ElementRef
+    @ViewChild('dataContainer', {static: false}) dataContainer: ElementRef;
   myOpts = {
+      title: {
+        text: 'Highcharts Histogram'
+      },
+      xAxis: [{
+        title: { text: 'xxxx' },
+        alignTicks: false
+      }],
+      yAxis: [{
+        title: { text: 'yyyyy' }
+      }],
       exporting: { enabled: false },
       plotOptions: {
         series: {
@@ -39,12 +51,26 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
   chart: any;
   fileId: number;
   maxNumberOfSeries: number
-  slope: number
-  intercept: number
+  slope: string
+  slopeStdError: string
+  intercept: string
+  interceptStdError: string
   viewMode: string
   dataMode: Mode
   numberOfColumns: number
   numberOfColumnsInTable: number
+  svgContent: string
+  chartTitle: string
+  xAxisTitle: string
+  yAxisTitle: string
+
+  setTitles() {
+    console.log(this.chart)
+    this.chart.xAxis[0].axisTitle.attr({text: this.xAxisTitle})
+    this.chart.yAxis[0].axisTitle.attr({text: this.yAxisTitle})
+    this.chart.title.update({text: this.chartTitle})
+    this.svgContent = this.chart.getSVG()
+  }
 
   getFilesFromSet(){
       this.regression = false;
@@ -79,7 +105,9 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
     this.dataVisualizationService.regression(linearRegression).subscribe(
         r => {
             this.slope = (r as LinearRegression).slope
+            this.slopeStdError = (r as LinearRegression).slopeStdError
             this.intercept = (r as LinearRegression).intercept
+            this.interceptStdError = (r as LinearRegression).interceptStdError
         }
     )
 
@@ -151,6 +179,10 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
     this.chart.series[0].update(this.drawChartFromSelectedFile(0))
     this.dataMode = Mode.SINGLE
     this.numberOfColumnsInTable = 2
+
+    this.modeAll()
+
+    this.svgContent = this.chart.getSVG()
   }
 
   modeSingle() {
@@ -169,6 +201,7 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
     if (this.chart.series[1]) {
         this.chart.series[1].update(this.drawEmptyChart())
     }
+    this.svgContent = this.chart.getSVG()
   }
 
   modeError() {
@@ -195,6 +228,7 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
             this.chart.series[i].update(this.drawEmptyChart())
         }
     }
+    this.svgContent = this.chart.getSVG()
   }
 
   modeRegression() {
@@ -211,6 +245,7 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
     for(let i=2;i< numberOfSeries;i++) {
         this.chart.series[i].update(this.drawEmptyChart())
     }
+    this.svgContent = this.chart.getSVG()
   }
 
   modeAll() {
@@ -225,6 +260,8 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
     for(let i=0;i< numberOfSeries;i++) {
         this.chart.series[i].update(this.drawChartFromSelectedFile(i))
     }
+
+    this.svgContent = this.chart.getSVG()
   }
 
   createCustomChart(myOpts: Object) {
@@ -328,7 +365,8 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
       if (point.x == null) {
         point.x = pointStart
       }
-      point.y = this.slope*point.x + this.intercept
+      point.y = Number(this.slope)*point.x + Number(this.intercept)
+      console.log("X=" + point.x + "Y=" + point.y + " slope " + Number(this.slope) + " intercept " + this.intercept)
       newData.push([+point.x, +point.y])
 
       let numberOfPoints = this.selectedFile.fileContent[0].length
@@ -337,7 +375,7 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
       if (point.x == null) {
         point.x = numberOfPoints-1
       }
-      point.y = this.slope*point.x + this.intercept
+      point.y = Number(this.slope)*point.x + Number(this.intercept)
       newData.push([+point.x, +point.y])
 
 

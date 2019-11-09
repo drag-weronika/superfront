@@ -3,8 +3,8 @@
   <div class="line"><app-collapse-menu-category [categories]="categories" (list2)="getCategories($event)" (selected2)="selectedChangeHandlerCategory($event)" ></app-collapse-menu-category></div>
   <div class="line"><app-collapse-menu-group [groups]="groups" (list3)="getGroups($event)" (selected3)="selectedChangeHandlerGroup($event)"></app-collapse-menu-group></div>
   <div class="line"><app-save-button (selectedSet)="setSubmit($event)"></app-save-button></div>
-  <p class="redalert" *ngIf="created">File management successful</p>
-  <p class="greenalert" *ngIf="notCreated">Error occurred</p>
+  <p class="redalert" *ngIf="notCreated">File and at least one of category or group must be selected</p>
+  <p class="greenalert" *ngIf="created">Successfully updated</p>
   <div class="right">
     <button class="btn"(click)="openModal('custom-modal-1')">+Create category</button>
     <br/>
@@ -17,7 +17,8 @@
 
   <h3>Set category name</h3>
   <p>Set name: <input type="text" [(ngModel)]="bodyText" /></p>
-  <button (click)="closeModal('custom-modal-1');">Save category</button>
+  <p *ngIf="categoryErrorOccurred">Category name must be unique</p>
+  <button (click)="closeModal('custom-modal-1');getCategories()">Save category</button>
   <button (click)="closeMod('custom-modal-1');">Cancel</button>
 
 </app-modal>

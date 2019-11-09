@@ -2,7 +2,7 @@
   <div class="description">
     <label>Choose file:</label>
   </div>
-  <select  (change)="emitSelected1($event.target.value)">
+  <select  (change)="emitSelected1($event.target.value) && requestList1()">
     <option value="0" >-----None-----</option>
     <option *ngFor="let file of files"  value={{file.fileId}}>{{file.fileName}}</option>
   </select>

@@ -1,7 +1,7 @@
 <table bgcolor="#FFFFFF"  *ngIf="fileToUpload1 && fileToUpload1.fileContent && fileToUpload1.fileContent.length" style="width:80%">
   <thead>
   <tr>
-    <th *ngFor="let x of [].constructor(fileToUpload1.fileContent.length)"></th>
+    <th *ngFor="let x of range(fileToUpload1.fileContent.length)">Column {{x+1}}</th>
   </tr>
   </thead>
   <tbody>

@@ -15,7 +15,7 @@ export class CollapseMenuFileComponent implements OnInit {
   constructor() { }
 
   requestList1(){
-    this.list1.emit(null);
+    this.list1.emit(5);
   }
 
   emitSelected1(val){

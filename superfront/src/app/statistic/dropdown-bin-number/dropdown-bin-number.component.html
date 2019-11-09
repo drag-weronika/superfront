@@ -1,0 +1,11 @@
+<div>
+  <div class="description">
+    <label>Choose bin number:</label>
+  </div>
+  <select  (change)="emitSelectedBinNumber($event.target.value)">
+    <option value="square-root">square-root</option>
+    <option value="sturges">sturges</option>
+    <option value="rice">rice</option>
+    <option value="custom">custom</option>
+  </select>
+</div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { DataVisualizationRoutingModule } from './data-visualization-routing.module';
 import { SharingComponent } from './sharing/sharing.component';
@@ -14,6 +15,7 @@ import { DataManipulationModule } from 'src/app/data-manipulation/data-manipulat
   declarations: [SharingComponent, DescriptionComponent, DataVisualizationComponent, DropdownFileSearchComponent],
   imports: [
     CommonModule,
+    FormsModule,
     DataVisualizationRoutingModule,
     DataManipulationModule
   ],

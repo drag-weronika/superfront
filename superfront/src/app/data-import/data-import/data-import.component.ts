@@ -36,6 +36,7 @@ export class DataImportComponent implements OnInit {
       let allTextLines = content.split(/\r\n/);
       if (allTextLines[0].search(/[a-zA-Z]/) >=0) {
         allTextLines = allTextLines.slice(1)
+        content = allTextLines.join('\r\n')
       }
       let numberOfColumns = allTextLines[0].split(',').length
       for (let i=0;i<numberOfColumns;i++) {
@@ -93,6 +94,11 @@ export class DataImportComponent implements OnInit {
              let fileReader = new FileReader();
              fileReader.onload = (e) => {
                this.fileToUpload.content = fileReader.result as string
+               let allTextLines = this.fileToUpload.content.split(/\r\n/);
+               if (allTextLines[0].search(/[a-zA-Z]/) >=0) {
+                       allTextLines = allTextLines.slice(1)
+                       this.fileToUpload.content = allTextLines.join('\r\n')
+               }
 
                if (!this.validateContent(this.fileToUpload.content)) {
                     this.parseErrorOccurred = true;

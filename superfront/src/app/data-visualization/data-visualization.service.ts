@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable }  from 'rxjs';
 import { HttpClient, HttpHeaders, HttpResponse, HttpRequest } from '@angular/common/http';
 import { FileRest } from 'src/app/_models/FileRest';
+import { SvgImage } from 'src/app/_models/SvgImage';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -25,6 +26,15 @@ export class DataVisualizationService {
          };
       console.log(JSON.stringify(fileRest))
     return this.http.put(this.baseUrl+'/files', JSON.stringify(fileRest),options);
+  }
+
+  publishImage(svgImage){
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    let options = {
+        headers: headers
+         };
+      console.log(JSON.stringify(svgImage))
+    return this.http.post(this.baseUrl+'/image', JSON.stringify(svgImage),options);
   }
 
   getSet(id:number){

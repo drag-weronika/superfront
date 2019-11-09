@@ -16,15 +16,17 @@ export class BasicVisualizationComponent implements OnInit, AfterViewInit, OnDes
 
   chartsList;
   uploadedFile: File;
+  numberOfColumns: number;
+  chart: any;
+  maxNumberOfSeries: number
 
   myOpts = {
-      series: [{
-          name: '',
-          data: []
-      }]
+      series: []
   }
 
   constructor(private hcs: HighchartsService, private changeDetectionRef: ChangeDetectorRef) {
+    this.maxNumberOfSeries = 100
+    this.numberOfColumns = 0
     }
 
   ngOnInit() {
@@ -53,41 +55,52 @@ export class BasicVisualizationComponent implements OnInit, AfterViewInit, OnDes
 
   readCsv(content) {
     let allTextLines = content.split(/\r\n/);
+    this.myOpts.series = []
+
+    for (let i=0;i<this.maxNumberOfSeries;i++) {
+            this.myOpts.series.push({visible: false,
+                                         showInLegend: false,
+                                         name: '',
+                                         data: []})
+    }
+
+    for (let i=0;i<this.numberOfColumns;i++) {
+        this.chart.series[i].update(this.myOpts.series[i])
+    }
+
+    this.numberOfColumns = allTextLines[0].split(',').length
+    for (let i=0;i<this.numberOfColumns;i++) {
+        this.uploadedFile.fileContent.push(new Array<Point>())
+        this.myOpts.series[i] = {visible: true,
+                                 name: '',
+                                 data: []}
+
+    }
+
     for (let i = 0; i < allTextLines.length; i++) {
         let data = allTextLines[i].split(',');
-        let tarr = [];
-        tarr.push(data[0]);
-        tarr.push(data[1]);
-        let point = new Point();
-        point.x = tarr[0];
-        point.y = tarr[1];
-        this.uploadedFile.fileContent[0].push(point)
+
+        for (let j=0;j<this.numberOfColumns;j++) {
+            let point = new Point();
+            point.y = data[j];
+            this.uploadedFile.fileContent[j].push(point)
+            this.myOpts.series[j].data.push(+point.y)
+        }
     }
     console.log(this.uploadedFile);
-
-    this.myOpts.series[0].data = []
-    for (let point of this.uploadedFile.fileContent[0]) {
-        this.myOpts.series[0].data.push([+point.x, +point.y])
-    }
     console.log(this.myOpts)
 
-    this.createCustomChart(this.myOpts);
+    if (this.chart == null) {
+        this.createCustomChart(this.myOpts);
+    }
+
+    for (let i=0;i<this.numberOfColumns;i++) {
+        this.chart.series[i].update(this.myOpts.series[i])
+    }
+
   }
 
   createCustomChart(myOpts: Object) {
-    this.hcs.createChart(this.chartEl.nativeElement, myOpts);
-  }
-
-  rmFirst() {
-    this.hcs.removeFirst();
-    this.changeDetectionRef.detectChanges();
-    console.log('rm first', this.hcs.getCharts());
-  }
-
-
-  rmLast() {
-    this.hcs.removeLast();
-    this.changeDetectionRef.detectChanges();
-    console.log('rm last', this.hcs.getCharts());
+    this.chart = this.hcs.createChart(this.chartEl.nativeElement, myOpts);
   }
 }

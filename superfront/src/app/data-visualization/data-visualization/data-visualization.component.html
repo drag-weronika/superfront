@@ -16,12 +16,13 @@
 <div class="mgr" *ngIf="viewMode=='chart'">
   <div #charts id="test" ></div>
   <p *ngIf="regression">y = {{slope}} * x + {{intercept}}</p>
+  <p *ngIf="regression">slope std error = {{slopeStdError}}, intercept std error = {{interceptStdError}}</p>
 </div>
 
   <table bgcolor="#FFFFFF"  *ngIf="viewMode=='table'" style="width:80%">
     <thead>
     <tr>
-      <th *ngFor="let x of [].constructor(numberOfColumnsInTable)"></th>
+      <th *ngFor="let x of range(numberOfColumnsInTable)">Column {{x+1}}</th>
     </tr>
     </thead>
     <tbody>
@@ -32,5 +33,12 @@
     </tr>
     </tbody>
   </table>
-  <app-description [selectedFile]="selectedFile"></app-description>
+
+  <input type="string" [(ngModel)]="chartTitle" name="chartTitleInput">
+  <input type="string" [(ngModel)]="xAxisTitle" name="xAxisTitleInput">
+  <input type="string" [(ngModel)]="yAxisTitle" name="yAxisTitleInput">
+  <button (click)="setTitles()">Set titles</button>
+
+  <app-description [svgContent]="svgContent"></app-description>
+
 </div>

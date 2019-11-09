@@ -19,7 +19,7 @@ export class RegisterpageComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) {
     this.errorText = []
-
+    this.doubledLogin = false
   }
 
   updateEmail(email) {
@@ -42,6 +42,7 @@ export class RegisterpageComponent implements OnInit {
     user.email = this.email;
     user.password = this.password;
     user.repeatedPassword = this.repeatedPassword;
+    this.doubledLogin = false;
 
     this.authService.registerUser(user).subscribe(
         data => {
@@ -67,6 +68,8 @@ export class RegisterpageComponent implements OnInit {
                         }
                     }
                 }
+            } else if (error.error == 'Registration Failed') {
+                this.doubledLogin = true;
             }
         }
     );

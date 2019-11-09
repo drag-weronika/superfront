@@ -2,7 +2,7 @@
   <div class="description">
     <label>Choose group:</label>
   </div>
-  <select (change)="emitSelected3($event.target.value)">
+  <select (change)="emitSelected3($event.target.value) && requestList3()">
     <option  value="0">-----None-----</option>
     <option *ngFor="let group of groups" value={{group.groupId}}>{{group.groupName}}</option>
   </select>

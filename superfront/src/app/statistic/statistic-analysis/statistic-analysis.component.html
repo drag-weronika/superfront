@@ -1,5 +1,7 @@
 <div class="mgr">
   <div class="line"><app-dropdown-file-by-category [filesByCategory]="filesByCategory" (list5)="getFilesByCategory()"(selectedByCategory)="selectedChangeHandler($event)"></app-dropdown-file-by-category></div>
+  <div class="line"><app-dropdown-bin-number (selectedBinNumber)="selectedBinNumberChangeHandler($event)"></app-dropdown-bin-number></div>
+  <input *ngIf="binNumberChoice==='custom'" min="2" type="number" [(ngModel)]="binNumber" name="inputName">
   <input type="number" [(ngModel)]="columnId" name="inputName">
   <button (click)="submit()">Submit</button>
   <br />

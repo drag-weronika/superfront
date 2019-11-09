@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { File } from 'src/app/_models/file';
-import { FileRest } from 'src/app/_models/FileRest';
+import { SvgImage } from 'src/app/_models/SvgImage';
 import { DataVisualizationService }from 'src/app/data-visualization/data-visualization.service';
 import {Router} from '@angular/router';
 
@@ -11,22 +10,31 @@ import {Router} from '@angular/router';
 })
 export class DescriptionComponent implements OnInit {
   description: string;
-  @Input() selectedFile: File;
-  constructor(private dataVisualizationService:DataVisualizationService, private router: Router){ }
+  publishError: boolean
+  publishSuccess: boolean
+  @Input() svgContent: string;
+  constructor(private dataVisualizationService:DataVisualizationService, private router: Router){
+    this.publishError = false
+    this.publishSuccess = false
+  }
 
   setDescription(text: any) {
-    console.log(this.selectedFile)
     this.description = text;
   }
 
   shareChartWithDescription() {
-    let fileRest = new FileRest();
-    fileRest.fileId = this.selectedFile.fileId;
-    fileRest.description = this.description;
+    let svgImage = new SvgImage();
+    svgImage.content = this.svgContent
+    svgImage.comment = this.description
 
-    this.dataVisualizationService.updateFile(fileRest).subscribe(
+    this.dataVisualizationService.publishImage(svgImage).subscribe(
         data => {
-            this.router.navigateByUrl('/data-visualisation');
+            this.publishSuccess = true
+            this.publishError = false
+        },
+        error => {
+            this.publishError = true;
+            this.publishSuccess = false;
         }
     );
   }

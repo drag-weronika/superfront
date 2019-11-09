@@ -22,6 +22,7 @@
       <div *ngFor="let s of suggestions" [ngClass]="isSelected(s) ? 'selected-suggestion' : ''" (click)="selectSuggestion(s)">{{ s.email }}</div>
     </div>
   </div>
+  <p *ngIf="errorOccurred">Group name should be unique</p>
   <button class="btn-bot" (click)="sendGroup()">+Create group</button>
 
 </div>

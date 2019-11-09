@@ -18,6 +18,7 @@ export class GroupComponent implements OnInit {
   userSelects=[];
   suggestions=[];
   groupName = "";
+  errorOccurred: boolean = false
 
   constructor(public dataManipulationService: DataManipulationService, private router: Router) { }
 
@@ -76,6 +77,9 @@ export class GroupComponent implements OnInit {
     this.dataManipulationService.addGroup(group).subscribe(
          data => {
              this.router.navigateByUrl('/data-manipulation');
+         },
+         error => {
+            this.errorOccurred = true
          }
      );
   }
