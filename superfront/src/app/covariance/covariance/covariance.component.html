@@ -2,6 +2,7 @@
 <div class="mgr">
   <div class="line"><app-dropdown-file-search [files]="files" (selectedSet)="selectedChangeHandler($event)"></app-dropdown-file-search></div>
   <br/>
+  <p>Set two columns with desired data:</p>
   <input type="number" [(ngModel)]="firstColumnId" name="inputName">
   <input type="number" [(ngModel)]="secondColumnId" name="inputName">
   <button (click)="compute()">Compute</button>

@@ -18,8 +18,6 @@ import { BasicAuthHtppInterceptorService } from './basicAuthHtppInterceptor.serv
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
-import { DataService } from './data.service';
-
 @NgModule({
   declarations: [
     AppComponent
