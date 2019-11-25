@@ -24,3 +24,27 @@ th, td {
   text-align: center;
 }
 
+.redalert{
+color: red;
+margin: 0px 0px 0px 0px;
+}
+
+.greenalert{
+color: green;
+margin: 0px 0px 0px 0px;
+}
+
+.i{
+display: inline-block;
+position: fixed;
+bottom: 10px;
+margin: 0px 0px 0px 0px;
+}
+
+p{
+margin: 0px 0px 0px 0px;
+}
+
+button{
+margin-right: 3px;
+}

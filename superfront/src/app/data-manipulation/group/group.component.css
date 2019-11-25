@@ -78,3 +78,13 @@ input:hover{
 .delete-icon-chip:hover {
   opacity: 1;
 }
+
+.redalert{
+color: red;
+margin: 0px 0px 0px 0px;
+}
+
+.greenalert{
+color: green;
+margin: 0px 0px 0px 0px;
+}

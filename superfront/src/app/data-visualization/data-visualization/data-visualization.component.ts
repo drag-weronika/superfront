@@ -21,14 +21,14 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
     @ViewChild('dataContainer', {static: false}) dataContainer: ElementRef;
   myOpts = {
       title: {
-        text: 'Highcharts Histogram'
+        text: 'Chart title'
       },
       xAxis: [{
-        title: { text: 'xxxx' },
+        title: { text: 'xAxis name ' },
         alignTicks: false
       }],
       yAxis: [{
-        title: { text: 'yyyyy' }
+        title: { text: 'yAxis name' }
       }],
       exporting: { enabled: false },
       plotOptions: {
@@ -347,6 +347,7 @@ export class DataVisualizationComponent implements OnInit, AfterViewInit, OnDest
   }
 
   drawLinearRegression() {
+
       let pointStart = Math.round(this.selectedFile.fileContent[0][0].x)
       if (Number.isNaN(pointStart)) {
         pointStart = 0

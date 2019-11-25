@@ -1,4 +1,17 @@
 .box-for-description{
 position: fixed;
-bottom: 30px;
+bottom: 10px;
+right: 10px;
+display: inline-block;
+
+}
+
+.redalert{
+color: red;
+margin: 0px 0px 0px 0px;
+}
+
+.greenalert{
+color: green;
+margin: 0px 0px 0px 0px;
 }

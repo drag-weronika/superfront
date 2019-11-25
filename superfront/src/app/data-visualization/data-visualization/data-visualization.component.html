@@ -3,10 +3,10 @@
   <div class="line"><app-dropdown-file-search [files]="files" (selectedSet)="selectedChangeHandler($event)"></app-dropdown-file-search></div>
   <div class="line"><div class="right">
     <button (click)="changeView()">Change view</button>
-    <button (click)="modeSingle()">Show single</button>
-    <button (click)="modeError()">Show error bars</button>
     <button (click)="modeAll()">Show all</button>
+    <button (click)="modeSingle()">Show single</button>
     <button (click)="modeRegression()">Show regression</button>
+    <button (click)="modeError()">Show error bars</button>
     <button (click)="exportAsPNG()">Save as PNG</button>
     <button (click)="exportAsPDF()">Save as PDF</button>
   </div></div>
@@ -15,8 +15,8 @@
   <br />
 <div class="mgr" *ngIf="viewMode=='chart'">
   <div #charts id="test" ></div>
-  <p *ngIf="regression">y = {{slope}} * x + {{intercept}}</p>
-  <p *ngIf="regression">slope std error = {{slopeStdError}}, intercept std error = {{interceptStdError}}</p>
+  <p *ngIf="regression">y = {{slope}} * x + {{intercept}} :  u(slope) = {{slopeStdError}}, u(intercept) = {{interceptStdError}}</p>
+
 </div>
 
   <table bgcolor="#FFFFFF"  *ngIf="viewMode=='table'" style="width:80%">
@@ -33,11 +33,14 @@
     </tr>
     </tbody>
   </table>
+  <div class="i">
+    <p>Set names to chart, xAxis and yAxis:</p>
+    <input type="string" [(ngModel)]="chartTitle" name="chartTitleInput">
+    <input type="string" [(ngModel)]="xAxisTitle" name="xAxisTitleInput">
+    <input type="string" [(ngModel)]="yAxisTitle" name="yAxisTitleInput">
+    <button (click)="setTitles()">Set titles</button>
+  </div>
 
-  <input type="string" [(ngModel)]="chartTitle" name="chartTitleInput">
-  <input type="string" [(ngModel)]="xAxisTitle" name="xAxisTitleInput">
-  <input type="string" [(ngModel)]="yAxisTitle" name="yAxisTitleInput">
-  <button (click)="setTitles()">Set titles</button>
 
   <app-description [svgContent]="svgContent"></app-description>
 

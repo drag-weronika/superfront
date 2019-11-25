@@ -1,0 +1,19 @@
+p{
+margin: 0px 0px 0px 0px;
+}
+
+.line{
+display: inline-block;
+}
+
+button{
+margin-right: 3px;
+}
+
+td{
+text-align: center;
+}
+
+th{
+text-align: center;
+}

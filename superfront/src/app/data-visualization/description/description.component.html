@@ -1,6 +1,8 @@
 <div class="box-for-description">
-<input type="text" (keyup)="setDescription($event.target.value)">
+
+  <p class="redalert" *ngIf="publishError">Something went wrong</p>
+  <p class="greenalert" *ngIf="publishSuccess">Published successfully</p>
+  <input type="text" (keyup)="setDescription($event.target.value)">
 <button (click)="shareChartWithDescription()">Add description and share chart</button>
-<p class="redalert" *ngIf="publishError">Publish failure</p>
-<p class="greenalert" *ngIf="publishSuccess">Publish success</p>
+
 </div>

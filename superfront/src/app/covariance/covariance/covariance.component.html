@@ -2,11 +2,14 @@
 <div class="mgr">
   <div class="line"><app-dropdown-file-search [files]="files" (selectedSet)="selectedChangeHandler($event)"></app-dropdown-file-search></div>
   <br/>
-  <p>Set two columns with desired data:</p>
+  <br/>
+  <div class="line">
+  <p>Set two columns with  data:</p>
   <input type="number" [(ngModel)]="firstColumnId" name="inputName">
   <input type="number" [(ngModel)]="secondColumnId" name="inputName">
   <button (click)="compute()">Compute</button>
   <button (click)="clear()">Clear</button>
+  </div>
   <br/>
   <br/>
   <table bgcolor="#FFFFFF" style="width:80%">
@@ -16,7 +19,7 @@
       <th>Second column</th>
       <th>Covariance</th>
       <th>Correlation</th>
-      <th>Ttest</th>
+      <th>t-Student test</th>
     </tr>
     </thead>
     <tbody>

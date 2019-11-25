@@ -17,6 +17,16 @@ margin-right: 10;
 margin: 10px 10px 10px 10px;
 }
 
+.redalert{
+color: red;
+margin: 0px 0px 0px 0px;
+}
+
+.greenalert{
+color: green;
+margin: 0px 0px 0px 0px;
+}
+
 app-modal {
       /* modals are hidden by default */
       display: none;

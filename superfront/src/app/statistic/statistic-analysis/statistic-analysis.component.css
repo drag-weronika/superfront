@@ -4,6 +4,20 @@ margin-right: 10px;
 }
 .mgr{
 margin: 10px 10px 10px 10px;
+
+
 }
 
+p{
+margin: 0px 0px 0px 0px;
+}
 
+.image{
+display: inline-block;
+ height: 40%;
+   width: 40%;
+   top: 30px;
+   margin-right: 30px;
+   margin-left: 30px;
+
+}

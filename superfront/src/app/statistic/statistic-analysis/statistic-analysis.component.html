@@ -1,16 +1,23 @@
 <div class="mgr">
   <div class="line"><app-dropdown-file-by-category [filesByCategory]="filesByCategory" (list5)="getFilesByCategory()"(selectedByCategory)="selectedChangeHandler($event)"></app-dropdown-file-by-category></div>
   <div class="line"><app-dropdown-bin-number (selectedBinNumber)="selectedBinNumberChangeHandler($event)"></app-dropdown-bin-number></div>
+ <div class="line">
+  <p *ngIf="binNumberChoice==='custom'">Set bin number:</p>
   <input *ngIf="binNumberChoice==='custom'" min="2" type="number" [(ngModel)]="binNumber" name="inputName">
+ </div>
+   <div class="line">
+   <p>Choose column with data:</p>
   <input type="number" [(ngModel)]="columnId" name="inputName">
   <button (click)="submit()">Submit</button>
+     </div>
   <br />
   <br />
   <div class="mgr">
-    <div #charts id="test"></div>
-    <br/>
-    <div #charts2 id="test2"></div>
+    <div class="image" #charts id="test"></div>
+
+    <div class="image" #charts2 id="test2"></div>
   </div>
 
 
 </div>
+

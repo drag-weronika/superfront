@@ -94,7 +94,8 @@ export class StatisticAnalysisComponent implements OnInit, AfterViewInit, OnDest
             }
 
             this.histogramOpts.series[0] = {
-                                                                       name: 'Histogram',
+                                                                       yAxis: 'Counts',
+                                                                       name: '',
                                                                        type: 'histogram',
                                                                        binsNumber: this.binsNumberVar,
                                                                        xAxis: 1,
@@ -147,18 +148,18 @@ export class StatisticAnalysisComponent implements OnInit, AfterViewInit, OnDest
                             text: 'Highcharts Histogram'
                         },
                         xAxis: [{
-                            title: { text: 'Data' },
+                            title: { text: 'x ' },
                             alignTicks: false
                         }, {
-                            title: { text: 'Histogram' },
+                            title: { text: ' ' },
                             alignTicks: false,
                             opposite: true
                         }],
 
                         yAxis: [{
-                            title: { text: 'Data' }
+                            title: { text: 'Counts' }
                         }, {
-                            title: { text: 'Histogram' },
+                            title: { text: ' y' },
                             opposite: true
                         }],
 
